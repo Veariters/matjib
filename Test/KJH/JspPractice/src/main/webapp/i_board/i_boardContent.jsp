@@ -4,10 +4,11 @@
 <%@ page import="board.BoardDAO" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ include file="view/color.jsp" %>
+<%@ page import="java.io.File" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <title>글 상세보기</title>
 <link href="../css/style.css" rel="stylesheet" type="text/css">
 </head>
@@ -60,7 +61,18 @@
 		
 			<tr height="30">
 				<td align="center" width="125" bgcolor="<%=value_c%>">글내용</td>
-				<td align="center" width="375" colspan="3"><pre><%=article.getMi_content() %></pre></td>
+				<td align="center" width="375" colspan="3"><pre><%=article.getMi_content() %></pre></td></tr>
+				
+				<% 
+				String real = "C:\\ADevelop\\eclipse_jspworkspace\\JspPractice\\image";
+				File viewFile = new File(real+"\\"+num+"사진.jpg");
+				if(viewFile.exists()){
+				%>
+			<tr>
+				<td colspan="4"><br><br>
+				<img alt="이미지" width="200" height="200" src="image/<%=num %>사진.jpg" border="300px" width="300px" height="300px"><br><br>
+				
+				<%}else{ %><td colspan="6"><br><br><%} %></td>
 			</tr>
 			<tr height="30">
 				<td colspan="4" bgcolor="<%=value_c%>" align="right">

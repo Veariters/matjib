@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import com.oreilly.servlet.MultipartRequest;
+
+
+
 public class BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 
 	private static BoardDAO instance = null;
@@ -30,7 +34,7 @@ public class BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		
 
 		int num = article.getMi_num();
 
@@ -39,36 +43,24 @@ public class BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 		String sql = "";
 
 		try {
-
-			/*
-			 * sql = "select max(num) from board";
-			 * 
-			 * pstmt = con.prepareStatement(sql);
-			 * 
-			 * rs = pstmt.executeQuery();
-			 * 
-			 * if(rs.next()) { // 새글일 경우의 조건 number = rs.getInt(1)+1; }else { number = 1; }
-			 */
-
-			// 새글을 추가하는 쿼리작성
-			sql = "insert into i_board(num, writer, pass, subject, content, postdate) values(board_seq.nextval, ?, ?, ?, ?, ?)";
+			
+			con = ConnUtil.getConnection();
+			
+			sql = "insert into i_board(mi_num, mi_writer, mi_pass, mi_subject, mi_content, mi_image, mi_postdate) values(board_seq.nextval,?,?,?,?,?,?)";
 
 			pstmt = con.prepareStatement(sql);
+			
 			pstmt.setString(1, article.getMi_writer());
 			pstmt.setString(2, article.getMi_pass());
 			pstmt.setString(3, article.getMi_subject());
 			pstmt.setString(4, article.getMi_content());
-			pstmt.setTimestamp(5, article.getMi_postdate());
+			pstmt.setString(5, article.getMi_image());
+			pstmt.setTimestamp(6, article.getMi_postdate());
 
 			pstmt.executeUpdate();
 		} catch (Exception s) {
 			System.out.println("Exception : " + s);
 		} finally {
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException s1) {
-				}
 			if (pstmt != null)
 				try {
 					pstmt.close();
