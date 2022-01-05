@@ -346,132 +346,172 @@ public class BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 		return article;
 	}
 
-	  // 글 상세보기 화면에서 [글수정]버튼을 누를 경우 updateForm.jsp로 이동하도록 링크를 걸어서 글 수정 화면을 설계 -> 글수정시에는 글목록보기와 다르게조회수를 증가시킬 필요 없음
-	
-						/* 
-						 * // 조회수를 증가시키는 부분을 제외하고 num에 해당하는 글을 가져오는 메서드 구현
-						 * 
-						 * public BoardVO updateGetArticle(int num) { Connection con = null;
-						 * PreparedStatement pstmt = null; ResultSet rs = null; BoardVO article = null;
-						 * 
-						 * try {
-						 * 
-						 * con = ConnUtil.getConnection();
-						 * 
-						 * pstmt = con.prepareStatement("select * from board where num = ?");
-						 * 
-						 * pstmt.setInt(1, num);
-						 * 
-						 * rs = pstmt.executeQuery();
-						 * 
-						 * if(rs.next()) { article = new BoardVO();
-						 * 
-						 * article.setNum(rs.getInt("num")); article.setWriter(rs.getString("writer"));
-						 * article.setEmail(rs.getString("email"));
-						 * article.setSubject(rs.getString("subject"));
-						 * article.setPass(rs.getString("pass"));
-						 * article.setRegdate(rs.getTimestamp("regdate"));
-						 * article.setReadcount(rs.getInt("readcount"));
-						 * article.setRef(rs.getInt("ref")); article.setStep(rs.getInt("step"));
-						 * article.setDepth(rs.getInt("depth"));
-						 * article.setContent(rs.getString("content"));
-						 * article.setIp(rs.getString("ip")); }
-						 * 
-						 * }catch (Exception s) { System.out.println("Exception : " + s); } finally { if
-						 * (rs != null) try { rs.close(); } catch (SQLException s1) { } if (pstmt !=
-						 * null) try { pstmt.close(); } catch (SQLException s2) { } if (con != null) try
-						 * { con.close(); } catch (SQLException s3) { } } return article; }
-						 * 
-						 * 
-						 * public int updateArticle(BoardVO article) { // 데이터베이스에서 실제 수정 처리가 되도록 메서드
-						 * 구현.(글이 없을 경우에는 -1반환, 수정 성공시 1반환, 수정 실패시 0 반환
-						 * 
-						 * Connection con = null; PreparedStatement pstmt = null; ResultSet rs = null;
-						 * 
-						 * String dbpass = ""; String sql = "";
-						 * 
-						 * int result = -1;
-						 * 
-						 * try {
-						 * 
-						 * con= ConnUtil.getConnection();
-						 * 
-						 * pstmt = con.prepareStatement("select pass from board where num = ?");
-						 * 
-						 * pstmt.setInt(1, article.getNum());
-						 * 
-						 * rs = pstmt.executeQuery();
-						 * 
-						 * if(rs.next()) {
-						 * 
-						 * dbpass = rs.getString("pass");
-						 * 
-						 * if(dbpass.equals(article.getPass())) { // 비밀번호가 일치할 경우 --> 수정 처리 sql =
-						 * "update board set writer=?, email=?, subject=?, content=? where num=?";
-						 * 
-						 * pstmt = con.prepareStatement(sql);
-						 * 
-						 * pstmt.setString(1, article.getWriter()); pstmt.setString(2,
-						 * article.getEmail()); pstmt.setString(3, article.getSubject());
-						 * pstmt.setString(4, article.getContent());
-						 * 
-						 * pstmt.executeUpdate();
-						 * 
-						 * result = 1;
-						 * 
-						 * }else { result = 0; }
-						 * 
-						 * }
-						 * 
-						 * }catch (Exception s) { System.out.println("Exception : " + s); } finally { if
-						 * (rs != null) try { rs.close(); } catch (SQLException s1) { } if (pstmt !=
-						 * null) try { pstmt.close(); } catch (SQLException s2) { } if (con != null) try
-						 * { con.close(); } catch (SQLException s3) { } } return result; }
-						 * 
-						 * 
-						 * 
-						 * 
-						 * public int deleteArticle(int num, String pass) { // 글 삭제 처리할 메서드 구현(DB에서
-						 * 비밀번호를 비교하여 삭제)
-						 * 
-						 * Connection con = null; PreparedStatement pstmt = null; ResultSet rs = null;
-						 * 
-						 * String dbpass = ""; String sql = "";
-						 * 
-						 * int result = -1;
-						 * 
-						 * try {
-						 * 
-						 * con= ConnUtil.getConnection();
-						 * 
-						 * pstmt = con.prepareStatement("select pass from board where num = ?");
-						 * 
-						 * pstmt.setInt(1, num);
-						 * 
-						 * rs = pstmt.executeQuery();
-						 * 
-						 * if(rs.next()) {
-						 * 
-						 * dbpass = rs.getString("pass");
-						 * 
-						 * if(dbpass.equals(pass)) { // 비밀번호가 일치할 경우 --> 삭제 처리 sql =
-						 * "delete from board where num=?";
-						 * 
-						 * pstmt = con.prepareStatement(sql);
-						 * 
-						 * pstmt.setInt(1, num);
-						 * 
-						 * pstmt.executeUpdate();
-						 * 
-						 * result = 1; // 삭제 성공 }else { result = 0; // 비밀번호가 틀렸을 경우 }
-						 * 
-						 * }
-						 * 
-						 * }catch (Exception s) { System.out.println("Exception : " + s); } finally { if
-						 * (rs != null) try { rs.close(); } catch (SQLException s1) { } if (pstmt !=
-						 * null) try { pstmt.close(); } catch (SQLException s2) { } if (con != null) try
-						 * { con.close(); } catch (SQLException s3) { } } return result;
-						 * 
-						 * }
-						 */	  
+	// 글 상세보기 화면에서 [글수정]버튼을 누를 경우 updateForm.jsp로 이동하도록 링크를 걸어서 글 수정 화면을 설계 ->
+	// 글수정시에는 글목록보기와 다르게조회수를 증가시킬 필요 없음
+
+	// 조회수를 증가시키는 부분을 제외하고 num에 해당하는 글을 가져오는 메서드 구현
+
+	public I_BoardVO updateGetArticle(int num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		I_BoardVO article = null;
+
+		try {
+
+			con = ConnUtil.getConnection();
+
+			pstmt = con.prepareStatement("select * from i_board where mi_num = ?");
+
+			pstmt.setInt(1, num);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				article = new I_BoardVO();
+
+				article.setMi_num(rs.getInt("mi_num"));
+				article.setMi_writer(rs.getString("mi_writer"));
+				article.setMi_pass(rs.getString("mi_pass"));
+				article.setMi_subject(rs.getString("mi_subject"));
+				article.setMi_readcount(rs.getInt("mi_readcount"));
+				article.setMi_image(rs.getString("mi_image"));
+				article.setMi_content(rs.getString("mi_content"));
+				article.setMi_postdate(rs.getTimestamp("mi_postdate"));
+			}
+
+		} catch (Exception s) {
+			System.out.println("Exception : " + s);
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException s1) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException s2) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException s3) {
+				}
+		}
+		return article;
+	}
+
+	public int updateArticle(I_BoardVO article) { // 데이터베이스에서 실제 수정 처리가 되도록 메서드구현.(글이 없을 경우에는 -1반환, 수정 성공시 1반환, 수정 실패시 0 반환 
+											
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String dbpass = "";
+		String sql = "";
+
+		int result = -1;
+
+		try {
+
+			con = ConnUtil.getConnection();
+			
+			pstmt = con.prepareStatement("select mi_pass from i_board where mi_num = ?");
+			
+			pstmt.setInt(1, article.getMi_num());
+			
+			rs = pstmt.executeQuery();
+			//여기까지는 성공
+			if (rs.next()) {
+				dbpass = rs.getString("mi_pass");
+
+				if (dbpass.equals(article.getMi_pass())) {				 // 비밀번호가 일치할 경우 --> 수정 처리
+					sql = "update i_board set mi_writer=?, mi_subject=?, mi_content=?, mi_image=?, mi_postdate=? where mi_num=?";
+
+					pstmt = con.prepareStatement(sql);
+
+					pstmt.setString(1, article.getMi_writer());	
+					pstmt.setString(2, article.getMi_subject());
+					pstmt.setString(3, article.getMi_content());
+					pstmt.setString(4, article.getMi_image());
+					pstmt.setTimestamp(5, article.getMi_postdate());
+					pstmt.setInt(6, article.getMi_num());
+					pstmt.executeUpdate();
+					
+					result = 1;
+
+				} else {
+					result = 0;
+				}
+			
+			}
+
+		} catch (Exception s) {
+			System.out.println("Exception : " + s);
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException s1) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException s2) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException s3) {
+				}
+		}
+		return result;
+	}
+
+				/*
+				 * public int deleteArticle(int num, String pass) { // 글 삭제 처리할 메서드 구현(DB에서
+				 * 비밀번호를 비교하여 삭제)
+				 * 
+				 * Connection con = null; PreparedStatement pstmt = null; ResultSet rs = null;
+				 * 
+				 * String dbpass = ""; String sql = "";
+				 * 
+				 * int result = -1;
+				 * 
+				 * try {
+				 * 
+				 * con= ConnUtil.getConnection();
+				 * 
+				 * pstmt = con.prepareStatement("select pass from board where num = ?");
+				 * 
+				 * pstmt.setInt(1, num);
+				 * 
+				 * rs = pstmt.executeQuery();
+				 * 
+				 * if(rs.next()) {
+				 * 
+				 * dbpass = rs.getString("pass");
+				 * 
+				 * if(dbpass.equals(pass)) { // 비밀번호가 일치할 경우 --> 삭제 처리 sql =
+				 * "delete from board where num=?";
+				 * 
+				 * pstmt = con.prepareStatement(sql);
+				 * 
+				 * pstmt.setInt(1, num);
+				 * 
+				 * pstmt.executeUpdate();
+				 * 
+				 * result = 1; // 삭제 성공 }else { result = 0; // 비밀번호가 틀렸을 경우 }
+				 * 
+				 * }
+				 * 
+				 * }catch (Exception s) { System.out.println("Exception : " + s); } finally { if
+				 * (rs != null) try { rs.close(); } catch (SQLException s1) { } if (pstmt !=
+				 * null) try { pstmt.close(); } catch (SQLException s2) { } if (con != null) try
+				 * { con.close(); } catch (SQLException s3) { } } return result;
+				 * 
+				 * }
+				 */
+						 	  
 	 	 }

@@ -133,7 +133,7 @@ if(count == 0) { // 저장된 글이 없을 경우
   <img src="../img/level.gif" width="<%=wid %>" height="16">
   <img src="../img/re.gif">
    <img src="../img/level.gif" width="<%=wid %>" height="16">
-   <a href="i_boardContent.jsp?num=<%= article.getMi_num()%>&pageNum=<%=currentPage%>">
+   <a href="i_boardContent.jsp?mi_num=<%= article.getMi_num()%>&pageNum=<%=currentPage%>">
     <%=article.getMi_subject() %></a> 
     <%if(article.getMi_readcount() >= 20) { %>
     <img alt="" src="img/hot.gif" border="0" height="16">

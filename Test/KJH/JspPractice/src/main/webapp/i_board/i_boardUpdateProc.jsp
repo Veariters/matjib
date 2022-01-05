@@ -11,6 +11,7 @@
 
 <%
 request.setCharacterEncoding("utf-8");
+out.println("여기까지성공1");
 
 String realFolder = "";
 String saveFolder = "/i_board/image";					// 학원에서 할 때
@@ -21,7 +22,7 @@ int size=5*1024*1024;
 ServletContext context = request.getServletContext();
 realFolder = context.getRealPath(saveFolder);
 System.out.println("============ uploadFilePath = " + realFolder);
-
+	
 
  MultipartRequest multi = new MultipartRequest(request, realFolder, size, encType, new DefaultFileRenamePolicy());		//파일업로드를 직접적으로 담당 		
 
@@ -31,8 +32,7 @@ System.out.println("============ uploadFilePath = " + realFolder);
  String mi_content = multi.getParameter("mi_content");
  String mi_image = multi.getFilesystemName("mi_image");
  String mi_postdate = request.getParameter("mi_postdate");
-	
-	
+
  File file = multi.getFile("mi_image");
 	long filesize = 0;
 	if ( file != null ) {
@@ -51,9 +51,28 @@ article.setMi_content(mi_content);
 article.setMi_image(mi_image);
 article.setMi_postdate(new Timestamp(System.currentTimeMillis()));
 
-dbPro.insertArticle(article);
+
+String pageNum = request.getParameter("pageNum");
 
 
-response.sendRedirect("i_boardList.jsp"); 
-	 	
+int check = dbPro.updateArticle(article);
+
+if(check==1){
 %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" http-equiv="Refresh" content="0; url=list.jsp?pageNum=<%=pageNum%>">
+<title></title>
+</head>
+<body>
+<div align="center">
+<%}else{ %>
+<script type="text/javascript">
+alert("비밀번호가 일치하지 않습니다.");
+history.go(-1);
+</script>
+<%} %>
+</div>
+</body>
+</html>

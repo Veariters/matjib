@@ -15,7 +15,7 @@
 <%
 request.setCharacterEncoding("utf-8");
 
-	int num = Integer.parseInt(request.getParameter("num"));
+	int mi_num = Integer.parseInt(request.getParameter("mi_num"));
 	String pageNum = request.getParameter("pageNum");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
@@ -23,7 +23,7 @@ request.setCharacterEncoding("utf-8");
 		I_BoardVO article = new I_BoardVO();
 		BoardDAO dbPro = BoardDAO.getInstance();
 		
-		article = dbPro.getArticle(num);
+		article = dbPro.getArticle(mi_num);
 
 %>
 <body bgcolor="<%=bodyback_c %>">
@@ -78,10 +78,10 @@ request.setCharacterEncoding("utf-8");
 					<input type="button" value="글쓰기" onClick="document.location.href='i_boardWriteForm.jsp'">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					
-					<input type="button" value="수정하기" onClick="document.location.href='i_boardUpdateForm.jsp?num=<%=article.getMi_num()%>&pageNum=<%=pageNum%>'">
+					<input type="button" value="수정하기" onClick="document.location.href='i_boardUpdateForm.jsp?mi_num=<%=article.getMi_num()%>&pageNum=<%=pageNum%>'">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					
-					<input type="button" value="삭제하기" onClick="document.location.href='i_boardDeleteForm.jsp?num=<%=article.getMi_num()%>&pageNum=<%=pageNum%>'">
+					<input type="button" value="삭제하기" onClick="document.location.href='i_boardDeleteForm.jsp?mi_num=<%=article.getMi_num()%>&pageNum=<%=pageNum%>'">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 
 					<input type="button" value="글목록" onClick="document.location.href='i_boardList.jsp?pageNum=<%=pageNum%>'">

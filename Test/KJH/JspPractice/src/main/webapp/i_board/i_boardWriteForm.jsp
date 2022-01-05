@@ -15,7 +15,7 @@
 	int num=0;		// 새 글이 처음 만들어졌을 때의 값들 초기화
 	
 	try{
-		if(request.getParameter("num") != null){				// 무언가 글이 있을 경우
+		if(request.getParameter("mi_num") != null){				// 무언가 글이 있을 경우
 			num = Integer.parseInt(request.getParameter("mi_num"));		// num = DB상에 저장되어 있는 해당 게시글의 일련번호
 		}
 %>
@@ -62,6 +62,7 @@
 		<td width="70" bgcolor="<%=value_c%>" align="center">첨부파일</td>
 		<td width="150"><input type="file" name="mi_image"></td>
 	</tr>
+	
 	<tr>
 		<td colspan="2" align="center" bgcolor="<%=value_c%>"><input type="submit" value="글쓰기">
 															  <input type="reset" value="다시작성">
