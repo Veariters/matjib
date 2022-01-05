@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.collections4.bag.SynchronizedSortedBag"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="board.I_BoardVO" %>
@@ -7,17 +8,14 @@
 <%@ page import="java.util.Enumeration" %>
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@ page import="com.oreilly.servlet.MultipartRequest"%>
-<% request.setCharacterEncoding("utf-8"); %>
-
 
 <%
+request.setCharacterEncoding("utf-8");
 String realFolder="";
-String saveFolder = "C:/ADevelop/eclipse_jspworkspace/JspPractice/image";
+String saveFolder = "C:/ADevelop/eclipse_jspworkspace/JspPractice/src/main/webapp/i_board/image";					// 학원에서 할 때
+//String saveFolder = "C:/ADevelop/jspproject/JspPractice/src/main/webapp/i_board/image";					// 집에서 할 때
 String encType = "utf-8";		
 int size=5*1024*1024;				
-
- /* ServletContext context = this.getServletContext();		//절대경로를 얻는다
- realFolder = context.getRealPath(saveFolder);			//saveFolder의 절대경로를 얻음 */ 
 
  MultipartRequest multi = new MultipartRequest(request, saveFolder, size, encType, new DefaultFileRenamePolicy());		//파일업로드를 직접적으로 담당 		
 
@@ -47,6 +45,8 @@ article.setMi_image(mi_image);
 article.setMi_postdate(new Timestamp(System.currentTimeMillis()));
 
 dbPro.insertArticle(article);
-	response.sendRedirect("i_boardList.jsp"); 
+
+
+response.sendRedirect("i_boardList.jsp"); 
 	 	
 %>

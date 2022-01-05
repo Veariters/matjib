@@ -71,7 +71,7 @@ number = count - (currentPage - 1) * pageSize;
 		<option value="Japaness">Japaness</option>
 	</select>
 </form><br>
-<form action="list.jsp" onsubmit="return search()" name="searchForm" align="right">
+<form action="i_boardList.jsp" onsubmit="return search()" name="searchForm" align="right">
  <select name="searchWhat">
   <option value="writer">작성자</option>
   <option value="subject">제목</option>

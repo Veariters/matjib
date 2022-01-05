@@ -172,7 +172,7 @@ public class BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 			con = ConnUtil.getConnection();
 
 			pstmt = con.prepareStatement("select * from (select rownum rmi_num, mi_num, mi_writer, mi_pass, mi_subject,  "
-							+ "mi_readcount, mi_content, mi_image, mi_postdate from (select * from i_board)) "
+							+ "mi_readcount, mi_content, mi_image, mi_postdate from (select * from i_board order by mi_num desc)) "
 							+ "where rmi_num>=? and rmi_num<=?");
 
 			pstmt.setInt(1, start); // 나중에 수정3

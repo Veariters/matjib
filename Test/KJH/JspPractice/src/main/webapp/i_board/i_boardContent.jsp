@@ -13,15 +13,17 @@
 <link href="../css/style.css" rel="stylesheet" type="text/css">
 </head>
 <%
+request.setCharacterEncoding("utf-8");
+
 	int num = Integer.parseInt(request.getParameter("num"));
 	String pageNum = request.getParameter("pageNum");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	try{
-		
+		I_BoardVO article = new I_BoardVO();
 		BoardDAO dbPro = BoardDAO.getInstance();
 		
-		I_BoardVO article = dbPro.getArticle(num);
+		article = dbPro.getArticle(num);
 
 %>
 <body bgcolor="<%=bodyback_c %>">
@@ -58,22 +60,19 @@
 				<td align="center" width="140" bgcolor="<%=value_c%>">작성일</td>
 				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMi_postdate() %></td>
 			</tr>
-		
-			<tr height="30">
-				<td align="center" width="125" bgcolor="<%=value_c%>">글내용</td>
-				<td align="center" width="375" colspan="3"><pre><%=article.getMi_content() %></pre></td></tr>
-				
-				<% 
-				String real = "C:\\ADevelop\\eclipse_jspworkspace\\JspPractice\\image";
-				File viewFile = new File(real+"\\"+num+"사진.jpg");
-				if(viewFile.exists()){
-				%>
 			<tr>
-				<td colspan="4"><br><br>
-				<img alt="이미지" width="200" height="200" src="image/<%=num %>사진.jpg" border="300px" width="300px" height="300px"><br><br>
-				
-				<%}else{ %><td colspan="6"><br><br><%} %></td>
+				<td align="center" width="140" bgcolor="<%=value_c%>">제목</td>
+				<td colspan="3" align="center" width="280" bgcolor="<%=bodyback_c%>"><%=article.getMi_subject() %></td>
 			</tr>
+			<tr>
+				<td colspan="4" height="200" valign="top">
+					<div>
+						<img src="image/<%=article.getMi_image() %>" width="200" onerror=""><br><br>
+					</div><br><br>
+					<%=article.getMi_content() %>
+				</td>
+			</tr>
+
 			<tr height="30">
 				<td colspan="4" bgcolor="<%=value_c%>" align="right">
 					<input type="button" value="글쓰기" onClick="document.location.href='i_boardWriteForm.jsp'">
