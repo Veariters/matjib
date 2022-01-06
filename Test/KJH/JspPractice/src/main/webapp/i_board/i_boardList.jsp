@@ -73,9 +73,9 @@ number = count - (currentPage - 1) * pageSize;
 </form><br>
 <form action="i_boardList.jsp" onsubmit="return search()" name="searchForm" align="right">
  <select name="searchWhat">
-  <option value="writer">작성자</option>
-  <option value="subject">제목</option>
-  <option value="content">내용</option> 
+  <option value="mi_writer">작성자</option>
+  <option value="mi_subject">제목</option>
+  <option value="mi_content">내용</option> 
  </select>
  <input type="text" name="searchText">
  <input type="submit" value="검색">
@@ -130,21 +130,15 @@ if(count == 0) { // 저장된 글이 없을 경우
   <%
    int wid = 0;
   %>
-  <img src="../img/level.gif" width="<%=wid %>" height="16">
-  <img src="../img/re.gif">
    <img src="../img/level.gif" width="<%=wid %>" height="16">
    <a href="i_boardContent.jsp?mi_num=<%= article.getMi_num()%>&pageNum=<%=currentPage%>">
     <%=article.getMi_subject() %></a> 
     <%if(article.getMi_readcount() >= 20) { %>
     <img alt="" src="img/hot.gif" border="0" height="16">
     <%} %>
-    <td align="center"><%=article.getMi_writer() %></td>
-  <td align="center" width="150">
-   <%=sdf.format(article.getMi_postdate()) %>
-  </td>
-  <td align="center" width="50">
-   <%=article.getMi_readcount() %>
-  </td>
+    <td align="center" width="100"><%=article.getMi_writer() %></td>
+  <td align="center" width="150"><%=sdf.format(article.getMi_postdate()) %></td>
+  <td align="center" width="50"><%=article.getMi_readcount() %></td>
  </tr>
  <%} %>
 </table>
@@ -201,9 +195,9 @@ if(count > 0) {
 	%>
 <form action="i_boardList.jsp" onsubmit="return search()" name="searchForm">
  <select name="searchWhat">
-  <option value="writer">작성자</option>
-  <option value="subject">제목</option>
-  <option value="content">내용</option> 
+  <option value="mi_writer">작성자</option>
+  <option value="mi_subject">제목</option>
+  <option value="mi_content">내용</option> 
  </select>
  <input type="text" name="searchText">
  <input type="submit" value="검색">

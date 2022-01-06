@@ -62,7 +62,7 @@ if(check==1){
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" http-equiv="Refresh" content="0; url=list.jsp?pageNum=<%=pageNum%>">
+<meta charset="UTF-8" http-equiv="Refresh" content="0; url=i_boardList.jsp?pageNum=<%=pageNum%>">
 <title></title>
 </head>
 <body>
