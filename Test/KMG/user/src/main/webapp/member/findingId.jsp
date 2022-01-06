@@ -36,9 +36,9 @@ function findingCheck() {
 	</tr>
 
 	<tr>
-		<td align="left"><b>이름</b></td>
+		<td align="left"><b>영문명</b></td>
 		<td>
-			<input type="text" name="name">
+			<input type="text" name="english">
 		</td>
 	</tr>
 	<tr>

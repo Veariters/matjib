@@ -18,6 +18,7 @@ request.setCharacterEncoding("UTF-8");
 <% if(loginID != null) { // 로그인이 성공한 경우%>
 <table width="300" border="0"  >
 	<tr>
+	
 		<td align="left" style="font-size:28pt; ">
 			<b>마이페이지</b>
 		</td>
@@ -36,7 +37,7 @@ request.setCharacterEncoding("UTF-8");
 		<td height="50"><a a style="text-decoration:none; font-size:20pt;" href="#">2. 작성리뷰 조회</td>
 	</tr>
 	<tr>
-		<td height="50"><a a style="text-decoration:none; font-size:20pt;" href="deleteForm.jsp">3. 회원탈퇴</td>
+		<td height="50"><a a style="text-decoration:none; font-size:20pt;" href="deleteForm2.jsp">3. 회원탈퇴</td>
 	</tr>
 	<tr>
 		<td height="50"><a a style="text-decoration:none; font-size:20pt;" href="logout.jsp">4. 로그아웃</td>

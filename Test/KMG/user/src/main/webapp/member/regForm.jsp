@@ -43,7 +43,14 @@
 			<input type="text" name="name">
 		</td>
 	</tr>
-		<tr>
+	<tr>
+		<td align="right">영문명 : </td>
+		<td>
+			<input type="text" name="english">
+		</td>
+	</tr>
+	
+	<tr>
 		<td align="right">이메일 : </td>
 		<td>
 			<input type="email" name="email">

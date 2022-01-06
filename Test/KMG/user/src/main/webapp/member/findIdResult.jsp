@@ -11,10 +11,10 @@
 <!DOCTYPE html>
 <%
  request.setCharacterEncoding("utf-8");
- String name = request.getParameter("name");
+ String english = request.getParameter("english");
  String email = request.getParameter("email");
      
- String id = dao.findId(name, email); //아이디를 디비에서 가져옴..실패시 널
+ String id = dao.findId(english, email); //아이디를 디비에서 가져옴..실패시 널
  
 %>
 <html>

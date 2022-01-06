@@ -48,6 +48,11 @@ MemberVO vo = dao.getMember(loginID);
 	</tr>
 	
 	<tr>
+		<td align="right">영문명 : </td>
+		<td><%=vo.getEnglish() %></td>
+	</tr>
+	
+	<tr>
 		<td align="right">전화번호 : </td>
 		<td><input type="text" name="phone1" size="4" value="<%=vo.getPhone1()%>">-
 			<input type="text" name="phone2" size="5" value="<%=vo.getPhone2()%>">-

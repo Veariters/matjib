@@ -5,6 +5,7 @@ public class MemberVO {
 	private String id;
 	private String pass;
 	private String name;
+	private String english;
 	private String email;
 	private String phone1;
 	private String phone2;
@@ -14,7 +15,6 @@ public class MemberVO {
 	private String address2;
 	private String likefood;
 	private String role;
-	
 	public String getId() {
 		return id;
 	}
@@ -32,6 +32,12 @@ public class MemberVO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getEnglish() {
+		return english;
+	}
+	public void setEnglish(String english) {
+		this.english = english;
 	}
 	public String getEmail() {
 		return email;
@@ -87,7 +93,6 @@ public class MemberVO {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
 	
 
 }

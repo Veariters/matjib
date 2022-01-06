@@ -115,20 +115,21 @@ public class MemberDAO {
 		
 		try { 
 			con = getConnection();
-			String strQuery = "insert into member values(?,?,?,?,?,?,?,?,?,?,?,?)";
+			String strQuery = "insert into member values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(strQuery);
 			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getPass());
 			pstmt.setString(3, vo.getName());
-			pstmt.setString(4, vo.getEmail());
-			pstmt.setString(5, vo.getPhone1());
-			pstmt.setString(6, vo.getPhone2());
-			pstmt.setString(7, vo.getPhone3());
-			pstmt.setString(8, vo.getZipcode());
-			pstmt.setString(9, vo.getAddress1());
-			pstmt.setString(10, vo.getAddress2());
-			pstmt.setString(11, vo.getLikefood());
-			pstmt.setString(12, vo.getRole());
+			pstmt.setString(4, vo.getEnglish());
+			pstmt.setString(5, vo.getEmail());
+			pstmt.setString(6, vo.getPhone1());
+			pstmt.setString(7, vo.getPhone2());
+			pstmt.setString(8, vo.getPhone3());
+			pstmt.setString(9, vo.getZipcode());
+			pstmt.setString(10, vo.getAddress1());
+			pstmt.setString(11, vo.getAddress2());
+			pstmt.setString(12, vo.getLikefood());
+			pstmt.setString(13, vo.getRole());
 			
 			int count = pstmt.executeUpdate();
 			if(count > 0) flag = true;
@@ -234,6 +235,7 @@ public class MemberDAO {
 				vo.setId(rs.getString("id"));
 				vo.setPass(rs.getString("pass"));
 				vo.setName(rs.getString("name"));
+				vo.setEnglish(rs.getString("english"));
 				vo.setEmail(rs.getString("email"));
 				vo.setPhone1(rs.getString("Phone1"));
 				vo.setPhone2(rs.getString("Phone2"));
@@ -313,7 +315,7 @@ public class MemberDAO {
 		}
 	}
 	
-	//로그인 기능
+	//삭제기능
 	public int deleteMember(String id, String pass) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -370,7 +372,7 @@ public class MemberDAO {
 	
 	
 	// 아이디 찾기
-	public String findId(String name, String email) {
+	public String findId(String english, String email) {
 		String id = null;
 		  Connection con = null;
 		  PreparedStatement pstmt = null;
@@ -378,9 +380,9 @@ public class MemberDAO {
 		
 		try {
 		    con = getConnection();
-			String sql = "select id from member where name=? and email=? ";
+			String sql = "select id from member where english=? and email=? ";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, name);
+			pstmt.setString(1, english);
 			pstmt.setString(2, email);
 			
 			rs = pstmt.executeQuery();
@@ -396,7 +398,7 @@ public class MemberDAO {
 	}
 	
 	// 비밀번호 찾기
-		public String findPw(String id, String name, String email) {
+		public String findPw(String id, String english, String email) {
 			String pass = null;
 			  Connection con = null;
 			  PreparedStatement pstmt = null;
@@ -404,10 +406,10 @@ public class MemberDAO {
 			
 			try {
 			    con = getConnection();
-				String sql = "select pass from member where id=? and name=? and email=? ";
+				String sql = "select pass from member where id=? and english=? and email=? ";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, id);
-				pstmt.setString(2, name);
+				pstmt.setString(2, english);
 				pstmt.setString(3, email);
 				
 				rs = pstmt.executeQuery();
@@ -421,4 +423,6 @@ public class MemberDAO {
 			}
 			return pass;
 		}
+
+	
 }

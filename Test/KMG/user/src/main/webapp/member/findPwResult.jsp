@@ -13,10 +13,10 @@
 <%
  request.setCharacterEncoding("utf-8");
  String id = request.getParameter("id");
- String name = request.getParameter("name");
+ String english = request.getParameter("english");
  String email = request.getParameter("email");
      
- String pass = dao.findPw(id, name, email); //아이디를 디비에서 가져옴..실패시 널
+ String pass = dao.findPw(id, english, email); //아이디를 디비에서 가져옴..실패시 널
  
 %>
 <html>

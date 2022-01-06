@@ -60,6 +60,36 @@ function inputCheck() {
 		return;
 	}
 	
+	if(document.regForm.english.value=="") {
+		alert("영문명을 입력해주세요.");
+		document.regForm.english.focus();
+		return;
+	}
+	
+
+	
+	var str=document.regForm.email.value;
+	var atPos=str.indexOf('@');
+	var atLastPos=str.lastIndexOf('@');
+	var dotPos=str.indexOf('.');
+	var spacePos=str.indexOf(' ');
+	var commaPos=str.indexOf(',');
+	var eMailSize=str.length;
+	
+	if(document.regForm.email.value=="") {
+		alert("이메일을 입력해 주세요.");
+		document.regForm.email.focus();
+		return;
+	}
+	
+	if(atPos > 1 && atPos == atLastPos && dotPos > 3 && spacePos == -1 && commaPos == -1 && atPos+1 < dotPos && dotPos+1 < eMailSize);
+	else {
+		alert('E_mail 주소 형식을 잘못 입력하셨습니다. \n\r 다시 입력해주세요.');
+		document.regForm.email.focus();
+		return;
+	}
+	
+	
 	if(document.regForm.phone1.value=="") {
 		alert("통신사를 입력해 주세요.");
 		document.regForm.phone1.focus();
@@ -75,27 +105,6 @@ function inputCheck() {
 	if(document.regForm.phone3.value=="") {
 		alert("전화번호를 입력해 주세요.");
 		document.regForm.phone3.focus();
-		return;
-	}
-	
-	if(document.regForm.email.value=="") {
-		alert("이메일을 입력해 주세요.");
-		document.regForm.email.focus();
-		return;
-	}
-	
-	var str=document.regForm.email.value;
-	var atPos=str.indexOf('@');
-	var atLastPos=str.lastIndexOf('@');
-	var dotPos=str.indexOf('.');
-	var spacePos=str.indexOf(' ');
-	var commaPos=str.indexOf(',');
-	var eMailSize=str.length;
-	
-	if(atPos > 1 && atPos == atLastPos && dotPos > 3 && spacePos == -1 && commaPos == -1 && atPos+1 < dotPos && dotPos+1 < eMailSize);
-	else {
-		alert('E_mail 주소 형식을 잘못 입력하셨습니다. \n\r 다시 입력해주세요.');
-		document.regForm.email.focus();
 		return;
 	}
 	
