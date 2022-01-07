@@ -1,8 +1,8 @@
 <%@page import="org.apache.commons.collections4.bag.SynchronizedSortedBag"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="board.I_BoardVO" %>
-<%@ page import="board.I_BoardDAO" %>
+<%@ page import="board.F_BoardVO" %>
+<%@ page import="board.F_BoardDAO" %>
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.io.File" %>
 <%@ page import="java.util.Enumeration" %>
@@ -14,7 +14,7 @@ request.setCharacterEncoding("utf-8");
 out.println("여기까지성공1");
 
 String realFolder = "";
-String saveFolder = "/i_board/image";					// 학원에서 할 때
+String saveFolder = "/f_board/image";					// 학원에서 할 때
 //String saveFolder = "C:/ADevelop/jspproject/JspPractice/src/main/webapp/i_board/image";					// 집에서 할 때
 String encType = "utf-8";		
 int size=5*1024*1024;	
@@ -26,30 +26,30 @@ System.out.println("============ uploadFilePath = " + realFolder);
 
  MultipartRequest multi = new MultipartRequest(request, realFolder, size, encType, new DefaultFileRenamePolicy());		//파일업로드를 직접적으로 담당 		
 
- String mi_writer = multi.getParameter("mi_writer");
- String mi_pass = multi.getParameter("mi_pass");
- String mi_subject = multi.getParameter("mi_subject");
- String mi_content = multi.getParameter("mi_content");
- String mi_image = multi.getFilesystemName("mi_image");
- String mi_postdate = request.getParameter("mi_postdate");
+ String mf_writer = multi.getParameter("mf_writer");
+ String mf_pass = multi.getParameter("mf_pass");
+ String mf_subject = multi.getParameter("mf_subject");
+ String mf_content = multi.getParameter("mf_content");
+ String mf_image = multi.getFilesystemName("mf_image");
+ String mf_postdate = request.getParameter("mf_postdate");
 
- File file = multi.getFile("mi_image");
+ File file = multi.getFile("mf_image");
 	long filesize = 0;
 	if ( file != null ) {
 		filesize = file.length();
 	}
 	
-	I_BoardVO article = new I_BoardVO();
-	I_BoardDAO dbPro = I_BoardDAO.getInstance();
+	F_BoardVO article = new F_BoardVO();
+	F_BoardDAO dbPro = F_BoardDAO.getInstance();
 	
 	
 	
-article.setMi_writer(mi_writer);
-article.setMi_pass(mi_pass);
-article.setMi_subject(mi_subject);
-article.setMi_content(mi_content);
-article.setMi_image(mi_image);
-article.setMi_postdate(new Timestamp(System.currentTimeMillis()));
+article.setMf_writer(mf_writer);
+article.setMf_pass(mf_pass);
+article.setMf_subject(mf_subject);
+article.setMf_content(mf_content);
+article.setMf_image(mf_image);
+article.setMf_postdate(new Timestamp(System.currentTimeMillis()));
 
 
 String pageNum = request.getParameter("pageNum");
@@ -62,7 +62,7 @@ if(check==1){
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" http-equiv="Refresh" content="0; url=i_boardList.jsp?pageNum=<%=pageNum%>">
+<meta charset="UTF-8" http-equiv="Refresh" content="0; url=f_boardList.jsp?pageNum=<%=pageNum%>">
 <title></title>
 </head>
 <body>

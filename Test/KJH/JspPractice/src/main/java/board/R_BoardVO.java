@@ -12,7 +12,7 @@ public class R_BoardVO {
 	private String mr2_content;
 	private String mr2_image;
 	private int mr2_up;
-	private int mr2_header;
+	private String mr2_header;
 	private int bcheck;
 	private Timestamp mr2_postdate;
 	
@@ -84,11 +84,11 @@ public class R_BoardVO {
 		this.mr2_up = mr2_up;
 	}
 
-	public int getMr2_header() {
+	public String getMr2_header() {
 		return mr2_header;
 	}
 
-	public void setMr2_header(int mr2_header) {
+	public void setMr2_header(String mr2_header) {
 		this.mr2_header = mr2_header;
 	}
 

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="board.I_BoardVO" %>
-<%@ page import="board.I_BoardDAO" %>
+<%@ page import="board.R_BoardVO" %>
+<%@ page import="board.R_BoardDAO" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ include file="view/color.jsp" %>
@@ -18,7 +18,7 @@ String searchWhat = request.getParameter("searchWhat");
 String searchText = request.getParameter("searchText");
 
 
-if(searchText != null){
+if(searchText != null || searchWhat != null){
 	searchText = new String(searchText.getBytes("utf-8"), "utf-8");
 }
 if(pageNum == null){
@@ -33,19 +33,28 @@ int endRow = currentPage * pageSize;
 int count = 0;
 int number = 0;
 
-List<I_BoardVO> articleList = null;
-I_BoardDAO dbPro = I_BoardDAO.getInstance();
+List<R_BoardVO> articleList = null;
+R_BoardDAO dbPro = R_BoardDAO.getInstance();
 count = dbPro.getArticleCount(); // 전체글 수
 
 // 검색이 아니면 전체 리스트를 보여주고 검색이면 검색한 내용만 보여줌
 
-if(searchText == null){
+if(searchText == null && searchWhat == null){
 	count = dbPro.getArticleCount();
 	if(count > 0) {
 		
 		articleList = dbPro.getArticles(startRow, endRow);
 	}
-}else{
+}else if(searchWhat == null){
+	
+	count = dbPro.getArticleCount(searchText);
+	if(count > 0){
+		
+		articleList = dbPro.getArticles(searchText, startRow, endRow);
+	}
+}
+else{
+	
 	count = dbPro.getArticleCount(searchWhat, searchText);
 	if(count > 0) {
 		articleList = dbPro.getArticles(searchWhat, searchText, startRow, endRow );
@@ -59,7 +68,7 @@ number = count - (currentPage - 1) * pageSize;
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 게시판</title>
+<title>맛집리뷰 게시판</title>
 <link href="../css/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="script.js"></script>
 </head>
@@ -70,11 +79,11 @@ number = count - (currentPage - 1) * pageSize;
 		<option value="Japaness">Japaness</option>
 	</select>
 </form><br>
-<form action="i_boardList.jsp" onsubmit="return search()" name="searchForm" align="right">
+<form action="r1_boardList.jsp" onsubmit="return search()" name="searchForm" align="right">
  <select name="searchWhat">
-  <option value="mi_writer">작성자</option>
-  <option value="mi_subject">제목</option>
-  <option value="mi_content">내용</option> 
+  <option value="mr2_writer">작성자</option>
+  <option value="mr2_subject">제목</option>
+  <option value="mr2_content">내용</option> 
  </select>
  <input type="text" name="searchText">
  <input type="submit" value="검색">
@@ -84,23 +93,34 @@ number = count - (currentPage - 1) * pageSize;
 <nav id="topMenu" align="center">
 	<ul>
 		<li><a href="i_boardList.jsp" class="menuLink">공지사항</a></li>
-		<li><a href="#" class="menuLink">자유게시판</a></li>
-		<li><a href="#" class="menuLink">맛집 리뷰 게시판</a></li>
+		<li><a href="f_boardList.jsp" class="menuLink">자유게시판</a></li>
+		<li><a href="r_boardList.jsp" class="menuLink">맛집 리뷰 게시판</a></li>
 		<li><a href="#" class="menuLink">회원 메뉴</a></li>
 	</ul>
 </nav>
 <hr color="skyblue">
-<div style="position: absolute; left: 35%; font-size:2em;"><b>공지게시판</b></div>
-<div style="position: absolute; left: 70%; font-size:20px;"><b>말머리</b></div>
+<div style="position: absolute; left: 35%; font-size:2em;"><b>맛집리뷰 게시판1(신촌~뚝섬)</b></div>
+<div style="position: absolute; left: 70%; font-size:20px;"><label><b>말머리</b></label></div>
 <div align="right">
-<form name="chooseGenre" align="right">
-	<select name="Genre" style="position: absolute; left: 74%; width:100px; height:30px">
-		<option value="Bunsik" align="center">분식</option>
-		<option value="Hansik" align="center">한식</option>
-		<option value="Ilsik" align="center">일식</option>
-		<option value="Jungsik" align="center">중식</option>
-		<option value="Yangsik" align="center">양식</option>
+<form action="r1_boardList.jsp" onsubmit="return search()" name="searchHeaderForm1" align="right">
+	<select name="searchText" style="position: absolute; left: 74%; width:300px; height:30px">
+		<option value="mr2_header" align="center">------------말머리 선택-------------</option>
+		<option value="mr2_header" align="center">동대문역사문화공원</option>
+		<option value="mr2_header" align="center">뚝섬</option>
+		<option value="x" align="center">상왕십리</option>
+		<option value="mr2_header" align="center">시청</option>
+		<option value="mr2_header" align="center">신당</option>
+		<option value="mr2_header" align="center">신촌</option>
+		<option value="mr2_header" align="center">아현</option>
+		<option value="mr2_header" align="center">왕십리</option>
+		<option value="mr2_header" align="center">을지로3가</option>
+		<option value="mr2_header" align="center">을지로4가</option>
+		<option value="mr2_header" align="center">을지로입구</option>
+		<option value="mr2_header" align="center">이대</option>
+		<option value="mr2_header" align="center">충정로</option>
+		<option value="mr2_header" align="center">한양대</option>
 	</select>
+	 <input type="submit" value="검색">
 </form>
 </div><br><br>
 <%
@@ -112,37 +132,39 @@ if(count == 0) { // 저장된 글이 없을 경우
  </tr>
 </table>
 <%} else{ // 글이 있을 경우 %>
-<table width="700" border="1" cellpadding="0" cellspacing="0" align="center">
+<table width="800" border="1" cellpadding="0" cellspacing="0" align="center">
  <tr height="30" bgcolor="<%=value_c %>">
   <td align="center" width="50">번호</td>
+  <td align="center" width="100">말머리</td>
   <td align="center" width="250">제목</td>
   <td align="center" width="100">작성자</td>
   <td align="center" width="150">작성일</td>
   <td align="center" width="50">조회수</td>
  </tr>
  <% for(int i = 0; i < articleList.size(); i++) {
- 	I_BoardVO article = (I_BoardVO)articleList.get(i);
+ 	R_BoardVO article = (R_BoardVO)articleList.get(i);
  %>
  <tr height="30">
   <td align="center" width="50"><%=number-- %></td>
+  <td align="center" width="100"><%=article.getMr2_header() %></td>
   <td width="250">
   <%
    int wid = 0;
   %>
    <img src="../img/level.gif" width="<%=wid %>" height="16">
-   <a href="i_boardContent.jsp?mi_num=<%= article.getMi_num()%>&pageNum=<%=currentPage%>">
-    <%=article.getMi_subject() %></a> 
-    <%if(article.getMi_readcount() >= 20) { %>
+   <a href="r1_boardContent.jsp?mi_num=<%= article.getMr2_num()%>&pageNum=<%=currentPage%>">
+    <%=article.getMr2_subject() %></a> 
+    <%if(article.getMr2_readcount() >= 20) { %>
     <img alt="" src="img/hot.gif" border="0" height="16">
     <%} %>
-    <td align="center" width="100"><%=article.getMi_writer() %></td>
-  <td align="center" width="150"><%=sdf.format(article.getMi_postdate()) %></td>
-  <td align="center" width="50"><%=article.getMi_readcount() %></td>
+    <td align="center" width="100"><%=article.getMr2_writer() %></td>
+  <td align="center" width="150"><%=sdf.format(article.getMr2_postdate()) %></td>
+  <td align="center" width="50"><%=article.getMr2_readcount() %></td>
  </tr>
  <%} %>
 </table>
-<%}
-%>
+<%}%>
+
 <!-- 페이징 처리 -->
 <%
 if(count > 0) {
@@ -161,42 +183,51 @@ if(count > 0) {
 	if(startPage > pageBlock) {
 		
 		// 검색일 경우와 아닐 경우 페이지 처리
-		if(searchText == null) {
+		if(searchText == null && searchWhat == null) {
 	%>
-	<a href="i_boardList.jsp?pageNum=<%= startPage-pageBlock %>">[이전]</a>
-	<% }else {	
+	<a href="r1_boardList.jsp?pageNum=<%= startPage-pageBlock %>">[이전]</a>
+	<% }else if(searchText == null){  %>
+		<a href="r1_boardList.jsp?pageNum=<%= startPage-pageBlock %>&searchWhat=<%=searchWhat%>">[이전]</a>
+	<%
+	}else {	
 	%>
-	<a href="i_boardList.jsp?pageNum=<%= startPage-pageBlock %>&searchWhat=<%=searchWhat%>&searchText=<%=searchText%>">[이전]</a>
+	<a href="r1_boardList.jsp?pageNum=<%= startPage-pageBlock %>&searchWhat=<%=searchWhat%>&searchText=<%=searchText%>">[이전]</a>
 	<% 
 		}
-		}
+	}	
+	
 	for(int i = startPage; i <= endPage; i++){
-		if(searchText == null){
+		if(searchText == null && searchWhat == null){
 	%>
-	<a href="i_boardList.jsp?pageNum=<%=i%>">[<%=i %>]</a>
+	<a href="r1_boardList.jsp?pageNum=<%=i%>">[<%=i %>]</a>
+	<% }else if(searchWhat == null){ %>
+	<a href="r1_boardList.jsp?pageNum=<%=i%>&searchWhat=<%=searchWhat%>">[<%=i %>]</a>
 	<%
 		}else {
 	%>		
-	<a href="i_boardList.jsp?pageNum=<%=i%>&searchWhat=<%=searchWhat%>&searchText=<%=searchText%>">[<%=i %>]</a>
+	<a href="r1_boardList.jsp?pageNum=<%=i%>&searchWhat=<%=searchWhat%>&searchText=<%=searchText%>">[<%=i %>]</a>
 	<% 	
 		}
 	}
+	
 	if(endPage < pageCount){
 		if(searchText == null) {
 	%>
-	<a href="i_boardList.jsp?pageNum=<%= startPage+pageBlock %>">[다음]</a>
+	<a href="r1_boardList.jsp?pageNum=<%= startPage+pageBlock %>">[다음]</a>
 	<% }else { %>
-	<a href="i_boardList.jsp?pageNum=<%= startPage+pageBlock %>&searchWhat=<%=searchWhat%>&searchText=<%=searchText%>">[다음]</a>
+	<a href="r1_boardList.jsp?pageNum=<%= startPage+pageBlock %>&searchWhat=<%=searchWhat%>&searchText=<%=searchText%>">[다음]</a>
 	<%
 	}
 	 }
-	}
+}
+
+
 	%>
-<form action="i_boardList.jsp" onsubmit="return search()" name="searchForm">
+<form action="r1_boardList.jsp" onsubmit="return search()" name="searchForm">
  <select name="searchWhat">
-  <option value="mi_writer">작성자</option>
-  <option value="mi_subject">제목</option>
-  <option value="mi_content">내용</option> 
+  <option value="mr2_writer">작성자</option>
+  <option value="mr2_subject">제목</option>
+  <option value="mr2_content">내용</option> 
  </select>
  <input type="text" name="searchText">
  <input type="submit" value="검색">
@@ -205,14 +236,13 @@ if(count > 0) {
 <div align="center">
 <table width = "700" align="center">
  <tr bgcolor="<%=value_c %>">
- <td style="position: absolute; left: 48%;"><a href="i_boardList.jsp">글 목록으로 돌아가기</a></td>
+ <td style="position: absolute; left: 48%;"><a href="r1_boardList.jsp">글 목록으로 돌아가기</a></td>
   <td align="right" >
-  <a href="i_boardWriteForm.jsp">글쓰기</a></td>
+  <a href="r1_boardWriteForm.jsp">글쓰기</a></td>
  </tr>
 </table>
 <hr color="skyblue">
 <footer id="footer">
-<div></div>
 <nav id="bottomMenu" align="center">
 	<ul>
 		<li><a href="#" class="bottomLink">페이지 이용방법&nbsp;&nbsp;</a></li>

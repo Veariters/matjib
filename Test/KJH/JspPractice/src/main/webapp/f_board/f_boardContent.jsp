@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="board.R_BoardVO" %>
-<%@ page import="board.R_BoardDAO" %>
+<%@ page import="board.F_BoardVO" %>
+<%@ page import="board.F_BoardDAO" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ include file="view/color.jsp" %>
 <%@ page import="java.io.File" %>
@@ -15,15 +15,15 @@
 <%
 request.setCharacterEncoding("utf-8");
 
-	int mi_num = Integer.parseInt(request.getParameter("mi_num"));
+	int mf_num = Integer.parseInt(request.getParameter("mf_num"));
 	String pageNum = request.getParameter("pageNum");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	try{
-		R_BoardVO article = new R_BoardVO();
-		R_BoardDAO dbPro = R_BoardDAO.getInstance();
+		F_BoardVO article = new F_BoardVO();
+		F_BoardDAO dbPro = F_BoardDAO.getInstance();
 		
-		article = dbPro.getArticle(mi_num);
+		article = dbPro.getArticle(mf_num);
 %>
 <body bgcolor="<%=bodyback_c %>">
 <form name="chooseLanguage" align="right">
@@ -49,52 +49,52 @@ request.setCharacterEncoding("utf-8");
 		<table width="700" border="1" cellpadding="0" cellspacing="0" align="center" bgcolor="<%=bodyback_c%>">
 			<tr height="30">
 				<td align="center" width="140" bgcolor="<%=value_c%>">글번호</td>
-				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMr2_num() %></td>
+				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMf_num() %></td>
 				<td align="center" width="140" bgcolor="<%=value_c%>">조회수</td>
-				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMr2_readcount() %></td>
+				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMf_readcount() %></td>
 			</tr>
 			<tr height="30">
 				<td align="center" width="140" bgcolor="<%=value_c%>">작성자</td>
-				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMr2_writer() %></td>
+				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMf_writer() %></td>
 				<td align="center" width="140" bgcolor="<%=value_c%>">작성일</td>
-				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMr2_postdate() %></td>
+				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMf_postdate() %></td>
 			</tr>
 			<tr>
 				<td align="center" width="140" bgcolor="<%=value_c%>">제목</td>
-				<td colspan="3" align="center" width="280" bgcolor="<%=bodyback_c%>"><%=article.getMr2_subject() %></td>
+				<td colspan="3" align="center" width="280" bgcolor="<%=bodyback_c%>"><%=article.getMf_subject() %></td>
 			</tr>
 			<tr>
 				<td colspan="4" height="200" valign="top">
 					<div>
 					<%
-					if(article.getMr2_image() != null){
+					if(article.getMf_image() != null){
 						
-						String [] imgArr = article.getMr2_image().split(",");
+						String [] imgArr = article.getMf_image().split(",");
 
 						for(int i = 0; i < imgArr.length; i++){
-							article.setMr2_image(imgArr[i]);
+							article.setMf_image(imgArr[i]);
 					
 					%>
-						<img src="image/<%=article.getMr2_image() %>" width="200" onerror=""><br>
+						<img src="image/<%=article.getMf_image() %>" width="200" onerror=""><br>
 						
 						<%} } %>
 					</div><br><br>
-					<%=article.getMr2_content() %>
+					<%=article.getMf_content() %>
 				</td>
 			</tr>
 
 			<tr height="30">
 				<td colspan="4" bgcolor="<%=value_c%>" align="right">
-					<input type="button" value="글쓰기" onClick="document.location.href='r_boardWriteForm.jsp'">
+					<input type="button" value="글쓰기" onClick="document.location.href='f_boardWriteForm.jsp'">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					
-					<input type="button" value="수정하기" onClick="document.location.href='r_boardUpdateForm.jsp?mi_num=<%=article.getMr2_num()%>&pageNum=<%=pageNum%>'">
+					<input type="button" value="수정하기" onClick="document.location.href='f_boardUpdateForm.jsp?mi_num=<%=article.getMf_num()%>&pageNum=<%=pageNum%>'">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					
-					<input type="button" value="삭제하기" onClick="document.location.href='r_boardDeleteForm.jsp?mi_num=<%=article.getMr2_num()%>&pageNum=<%=pageNum%>'">
+					<input type="button" value="삭제하기" onClick="document.location.href='f_boardDeleteForm.jsp?mi_num=<%=article.getMf_num()%>&pageNum=<%=pageNum%>'">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 
-					<input type="button" value="글목록" onClick="document.location.href='r_boardList.jsp?pageNum=<%=pageNum%>'">
+					<input type="button" value="글목록" onClick="document.location.href='f_boardList.jsp?pageNum=<%=pageNum%>'">
 				</td>
 				
 			</tr>

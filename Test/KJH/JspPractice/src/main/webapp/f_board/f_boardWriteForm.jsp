@@ -50,8 +50,8 @@ function fileElement(fe){
 	int num=0;		// 새 글이 처음 만들어졌을 때의 값들 초기화
 	
 	try{
-		if(request.getParameter("mi_num") != null){				// 무언가 글이 있을 경우
-			num = Integer.parseInt(request.getParameter("mi_num"));		// num = DB상에 저장되어 있는 해당 게시글의 일련번호
+		if(request.getParameter("mf_num") != null){				// 무언가 글이 있을 경우
+			num = Integer.parseInt(request.getParameter("mf_num"));		// num = DB상에 저장되어 있는 해당 게시글의 일련번호
 		}
 %>
 <body bgcolor="<%=bodyback_c%>">
@@ -73,25 +73,25 @@ function fileElement(fe){
 </nav>
 <hr color="skyblue">
 <div style="position: absolute; left: 35%; font-size:2em;"><b>글쓰기</b></div><br><br>
-<form action="i_boardWriteForm.jsp" name="i_boardWriteForm" method="post" onsubmit="return writeSave()">
+<form action="f_boardWriteForm.jsp" name="f_boardWriteForm" method="post" onsubmit="return writeSave()">
 <!-- 폼이 넘어갈 때 위의 숫자 변수들을 같이 처리함-->
 <input type="hidden" name="num" value="<%=num %>">
 <table width="470" border="1" cellpadding="0" cellspacing="0" align="center" bgcolor="<%=bodyback_c%>">
 	<tr>
 		<td width="140" bgcolor="<%=value_c%>" align="center">아이디</td>
-		<td width="330"><input type="text" size="20" maxlength="20" name="mi_writer" value='<%=getParam(request, "mi_writer")%>'></td>
+		<td width="330"><input type="text" size="20" maxlength="20" name="mi_writer" value='<%=getParam(request, "mf_writer")%>'></td>
 	</tr>
 	<tr>
 		<td width="140" bgcolor="<%=value_c%>" align="center">비밀번호</td>
-		<td width="330"><input type="password" size="20" maxlength="20" name="mi_pass" value='<%=getParam(request, "mi_pass")%>'></td>
+		<td width="330"><input type="password" size="20" maxlength="20" name="mf_pass" value='<%=getParam(request, "mf_pass")%>'></td>
 	</tr>
 	<tr>
 		<td width="140" bgcolor="<%=value_c%>" align="center">제목</td>
-		<td width="330"><input type="text" size="50" maxlength="50" name="mi_subject" value='<%=getParam(request, "mi_subject")%>'></td>
+		<td width="330"><input type="text" size="50" maxlength="50" name="mf_subject" value='<%=getParam(request, "mf_subject")%>'></td>
 	</tr>
 	<tr>
 		<td width="140" bgcolor="<%=value_c%>" align="center">내용</td>
-		<td width="330"><textarea rows="14" cols="50" name="mi_content"><%=getParam(request, "mi_content")%></textarea></td>
+		<td width="330"><textarea rows="14" cols="50" name="mf_content"><%=getParam(request, "mf_content")%></textarea></td>
 	</tr>
 	<tr>
 		<td width="140" bgcolor="<%=value_c%>" align="center">추가할 파일 수(최대 9개)</td>
@@ -110,11 +110,11 @@ function fileElement(fe){
 		filecnt = Integer.parseInt(request.getParameter("add"));
 	}
 	%>
-	<form action="i_boardWriteProc.jsp" encType="multipart/form-data" method="post">
-		<input type="hidden" name="mi_writer" value="<%=getParam(request, "mi_writer") %>">
-		<input type="hidden" name="mi_pass" value="<%=getParam(request, "mi_pass") %>">
-		<input type="hidden" name="mi_subject" value="<%=getParam(request, "mi_subject") %>">
-		<input type="hidden" name="mi_content" value="<%=getParam(request, "mi_content") %>">
+	<form action="f_boardWriteProc.jsp" encType="multipart/form-data" method="post">
+		<input type="hidden" name="mf_writer" value="<%=getParam(request, "mf_writer") %>">
+		<input type="hidden" name="mf_pass" value="<%=getParam(request, "mf_pass") %>">
+		<input type="hidden" name="mf_subject" value="<%=getParam(request, "mf_subject") %>">
+		<input type="hidden" name="mf_content" value="<%=getParam(request, "mf_content") %>">
 		<input type="hidden" name="add" value="<%=getParam(request, "add") %>">
 	<% 
 	for(int i = 0; i < filecnt; i++){
@@ -123,14 +123,14 @@ function fileElement(fe){
 		}
 	
 	%>
-	<%=i+1 %> 번째 파일 선택 : <input type="file" name="mi_image<%=i+1%>"><br>
+	<%=i+1 %> 번째 파일 선택 : <input type="file" name="mf_image<%=i+1%>"><br>
 	
 	<%} %>
 	<table>
 	<tr>
 		<td colspan="2" align="center" bgcolor="<%=value_c%>"><input type="submit" value="글쓰기">
 															  <input type="reset" value="다시작성">
-															  <input type="button" value="목록" onClick="window.location='i_boardList.jsp'"></td>
+															  <input type="button" value="목록" onClick="window.location='f_boardList.jsp'"></td>
 	</tr>
 	</table>
 </form>
