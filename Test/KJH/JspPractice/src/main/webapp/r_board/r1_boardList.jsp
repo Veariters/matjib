@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>    
 <%@ page import="board.R_BoardVO" %>
 <%@ page import="board.R_BoardDAO" %>
 <%@ page import="java.util.*" %>
@@ -8,8 +8,10 @@
 <%@ include file="view/color.jsp" %>
 
 <%
+request.setCharacterEncoding("utf-8");
 // 한 페이지에 보여줄 목록 수 지정
 int pageSize = 5;
+
 
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -18,9 +20,10 @@ String searchWhat = request.getParameter("searchWhat");
 String searchText = request.getParameter("searchText");
 
 
-if(searchText != null || searchWhat != null){
-	searchText = new String(searchText.getBytes("utf-8"), "utf-8");
+if(searchText != null){
+	searchWhat = new String(searchWhat.getBytes("utf-8"), "utf-8");
 }
+
 if(pageNum == null){
 	pageNum = "1";
 }
@@ -45,21 +48,21 @@ if(searchText == null && searchWhat == null){
 		
 		articleList = dbPro.getArticles(startRow, endRow);
 	}
-}else if(searchWhat == null){
-	
-	count = dbPro.getArticleCount(searchText);
+}  else if(searchText == null){
+
+	count = dbPro.getArticleCount(searchWhat);
 	if(count > 0){
 		
-		articleList = dbPro.getArticles(searchText, startRow, endRow);
+		articleList = dbPro.getArticles(searchWhat, startRow, endRow);
 	}
-}
-else{
-	
+}  
+else{	
 	count = dbPro.getArticleCount(searchWhat, searchText);
 	if(count > 0) {
 		articleList = dbPro.getArticles(searchWhat, searchText, startRow, endRow );
 	}
 }
+
 
 number = count - (currentPage - 1) * pageSize;
 %>
@@ -69,6 +72,7 @@ number = count - (currentPage - 1) * pageSize;
 <head>
 <meta charset="UTF-8">
 <title>맛집리뷰 게시판</title>
+
 <link href="../css/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="script.js"></script>
 </head>
@@ -79,11 +83,12 @@ number = count - (currentPage - 1) * pageSize;
 		<option value="Japaness">Japaness</option>
 	</select>
 </form><br>
-<form action="r1_boardList.jsp" onsubmit="return search()" name="searchForm" align="right">
+<form action="r1_boardList.jsp"  name="searchForm" align="right">
  <select name="searchWhat">
-  <option value="mr2_writer">작성자</option>
+<!--   <option value="mr2_writer">작성자</option>
   <option value="mr2_subject">제목</option>
-  <option value="mr2_content">내용</option> 
+  <option value="mr2_content">내용</option>  -->
+  <option value="mr2_header">말머리</option>
  </select>
  <input type="text" name="searchText">
  <input type="submit" value="검색">
@@ -102,25 +107,27 @@ number = count - (currentPage - 1) * pageSize;
 <div style="position: absolute; left: 35%; font-size:2em;"><b>맛집리뷰 게시판1(신촌~뚝섬)</b></div>
 <div style="position: absolute; left: 70%; font-size:20px;"><label><b>말머리</b></label></div>
 <div align="right">
-<form action="r1_boardList.jsp" onsubmit="return search()" name="searchHeaderForm1" align="right">
+<form action="r1_boardList.jsp" name="searchHeaderForm1" align="right" >
 	<select name="searchText" style="position: absolute; left: 74%; width:300px; height:30px">
-		<option value="mr2_header" align="center">------------말머리 선택-------------</option>
-		<option value="mr2_header" align="center">동대문역사문화공원</option>
-		<option value="mr2_header" align="center">뚝섬</option>
+		<option value="" align="center">------------말머리 선택-------------</option>
+		<option align="center">동대문역사문화공원</option>
+		<option align="center">뚝섬</option>
 		<option value="x" align="center">상왕십리</option>
-		<option value="mr2_header" align="center">시청</option>
-		<option value="mr2_header" align="center">신당</option>
-		<option value="mr2_header" align="center">신촌</option>
-		<option value="mr2_header" align="center">아현</option>
-		<option value="mr2_header" align="center">왕십리</option>
-		<option value="mr2_header" align="center">을지로3가</option>
-		<option value="mr2_header" align="center">을지로4가</option>
-		<option value="mr2_header" align="center">을지로입구</option>
-		<option value="mr2_header" align="center">이대</option>
-		<option value="mr2_header" align="center">충정로</option>
-		<option value="mr2_header" align="center">한양대</option>
+		<option value="시청" align="center">시청</option>
+		<option value="신당" align="center">신당</option>
+		<option align="center">신촌</option>
+		<option align="center">아현</option>
+		<option align="center">왕십리</option>
+		<option align="center">을지로3가</option>
+		<option align="center">을지로4가</option>
+		<option align="center">을지로입구</option>
+		<option align="center">이대</option>
+		<option align="center">충정로</option>
+		<option align="center">한양대</option>
+		<option align="center">한양대</option>
 	</select>
-	 <input type="submit" value="검색">
+	 <input type="hidden" name="searchWhat" value="mr2_header">
+	 <input type="submit" value="검색" >
 </form>
 </div><br><br>
 <%
@@ -228,6 +235,7 @@ if(count > 0) {
   <option value="mr2_writer">작성자</option>
   <option value="mr2_subject">제목</option>
   <option value="mr2_content">내용</option> 
+  <option value="mr2_header">말머리</option>
  </select>
  <input type="text" name="searchText">
  <input type="submit" value="검색">

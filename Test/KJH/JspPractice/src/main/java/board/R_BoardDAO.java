@@ -267,7 +267,7 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 		return articleList;
 	}
 
-	public List<R_BoardVO> getArticles(String content, int start, int end) { // board table에서 가져올 메소드를
+	public List<R_BoardVO> getArticles(String what, int start, int end) { // board table에서 가져올 메소드를
 		// List로 구현 -> 나중에 수정1 검색할 내용을 리스트로받아옴(what-검색조건, content-검색내용,
 		// start-시작번호,end-끝번호)
 
@@ -282,11 +282,13 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 
 			pstmt = con.prepareStatement(
 					"select * from (select rownum rmr2_num, mr2_num, mr2_writer, mr2_pass, mr2_subject, mr2_readcount, "
-							+ "mr2_content, mr2_image, mr2_up, mr2_header,mr2_bcheck, mr2_postdate from (select * from r_board where " + content +  " = mr2_header)) "
-							+ "where rmr2_num>=? and rmr2_num<=?");
+							+ "mr2_content, mr2_image, mr2_up, mr2_header, mr2_bcheck, mr2_postdate from (select * from r_board where mr2_header ='"+what+"')) "
+							+"where rmr2_num>=? and rmr2_num<=?");
 
+			
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
+			
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
