@@ -1,7 +1,7 @@
 <%@page import="org.apache.commons.collections4.bag.SynchronizedSortedBag"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="board.R_BoardVO" %>
+<%@ page import="board.R2_BoardVO" %>
 <%@ page import="board.R_BoardDAO" %>
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.io.File" %>
@@ -66,7 +66,7 @@ String mr2_image = "";
 		filesize = file.length();
 	} */
 	
-	R_BoardVO article = new R_BoardVO();
+	R2_BoardVO article = new R2_BoardVO();
 	R_BoardDAO dbPro = R_BoardDAO.getInstance(); 
 	
 	request.setAttribute("imgArr", mr2_image);

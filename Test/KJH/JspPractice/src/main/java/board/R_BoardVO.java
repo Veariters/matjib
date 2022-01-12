@@ -4,109 +4,112 @@ import java.sql.Timestamp;
 
 public class R_BoardVO {
 
-	private int mr2_num;
-	private String mr2_writer;
-	private String mr2_pass;
-	private String mr2_subject;
-	private int mr2_readcount;
-	private String mr2_content;
-	private String mr2_image;
-	private int mr2_up;
-	private String mr2_header;
-	private int bcheck;
-	private Timestamp mr2_postdate;
+	private int mr_num;
+	private String mr_writer;
+	private String mr_pass;
+	private String mr_subject;
+	private int mr_readcount;
+	private String mr_content;
+	private String mr_image;
+	private int mr_up;
+	private String mr_header;
+	private int mr_bcheck;
+	private Timestamp mr_postdate;
 	
 	public R_BoardVO() {
 	
 	}
 
-	public int getMr2_num() {
-		return mr2_num;
+	public int getMr_num() {
+		return mr_num;
 	}
 
-	public void setMr2_num(int mr2_num) {
-		this.mr2_num = mr2_num;
+	public void setMr_num(int mr_num) {
+		this.mr_num = mr_num;
 	}
 
-	public String getMr2_writer() {
-		return mr2_writer;
+	public String getMr_writer() {
+		return mr_writer;
 	}
 
-	public void setMr2_writer(String mr2_writer) {
-		this.mr2_writer = mr2_writer;
+	public void setMr_writer(String mr_writer) {
+		this.mr_writer = mr_writer;
 	}
 
-	public String getMr2_pass() {
-		return mr2_pass;
+	public String getMr_pass() {
+		return mr_pass;
 	}
 
-	public void setMr2_pass(String mr2_pass) {
-		this.mr2_pass = mr2_pass;
+	public void setMr_pass(String mr_pass) {
+		this.mr_pass = mr_pass;
 	}
 
-	public String getMr2_subject() {
-		return mr2_subject;
+	public String getMr_subject() {
+		return mr_subject;
 	}
 
-	public void setMr2_subject(String mr2_subject) {
-		this.mr2_subject = mr2_subject;
+	public void setMr_subject(String mr_subject) {
+		this.mr_subject = mr_subject;
 	}
 
-	public int getMr2_readcount() {
-		return mr2_readcount;
+	public int getMr_readcount() {
+		return mr_readcount;
 	}
 
-	public void setMr2_readcount(int mr2_readcount) {
-		this.mr2_readcount = mr2_readcount;
+	public void setMr_readcount(int mr_readcount) {
+		this.mr_readcount = mr_readcount;
 	}
 
-	public String getMr2_content() {
-		return mr2_content;
+	public String getMr_content() {
+		return mr_content;
 	}
 
-	public void setMr2_content(String mr2_content) {
-		this.mr2_content = mr2_content;
+	public void setMr_content(String mr_content) {
+		this.mr_content = mr_content;
 	}
 
-	public String getMr2_image() {
-		return mr2_image;
+	public String getMr_image() {
+		return mr_image;
 	}
 
-	public void setMr2_image(String mr2_image) {
-		this.mr2_image = mr2_image;
+	public void setMr_image(String mr_image) {
+		this.mr_image = mr_image;
 	}
 
-	public int getMr2_up() {
-		return mr2_up;
+	public int getMr_up() {
+		return mr_up;
 	}
 
-	public void setMr2_up(int mr2_up) {
-		this.mr2_up = mr2_up;
+	public void setMr_up(int mr_up) {
+		this.mr_up = mr_up;
 	}
 
-	public String getMr2_header() {
-		return mr2_header;
+	public String getMr_header() {
+		return mr_header;
 	}
 
-	public void setMr2_header(String mr2_header) {
-		this.mr2_header = mr2_header;
+	public void setMr_header(String mr_header) {
+		this.mr_header = mr_header;
 	}
 
-	public int getBcheck() {
-		return bcheck;
+	public int getMr_bcheck() {
+		return mr_bcheck;
 	}
 
-	public void setBcheck(int bcheck) {
-		this.bcheck = bcheck;
+	public void setMr_bcheck(int mr_bcheck) {
+		this.mr_bcheck = mr_bcheck;
 	}
 
-	public Timestamp getMr2_postdate() {
-		return mr2_postdate;
+	public Timestamp getMr_postdate() {
+		return mr_postdate;
 	}
 
-	public void setMr2_postdate(Timestamp mr2_postdate) {
-		this.mr2_postdate = mr2_postdate;
+	public void setMr_postdate(Timestamp mr_postdate) {
+		this.mr_postdate = mr_postdate;
 	}
+	
+	
+	
 	
 	
 }

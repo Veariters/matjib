@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="board.R_BoardVO" %>
+<%@ page import="board.R2_BoardVO" %>
 <%@ page import="board.R_BoardDAO" %>
 <%@ include file="view/color.jsp" %>
 <!DOCTYPE html>
@@ -19,7 +19,7 @@ int num = Integer.parseInt(request.getParameter("mr2_num"));
 		
 		R_BoardDAO dbPro = R_BoardDAO.getInstance();
 		
-		R_BoardVO article = dbPro.updateGetArticle(num);
+		R2_BoardVO article = dbPro.updateGetArticle(num);
 %>	
 <body bgcolor="<%=bodyback_c%>">
 <form name="chooseLanguage" align="right">

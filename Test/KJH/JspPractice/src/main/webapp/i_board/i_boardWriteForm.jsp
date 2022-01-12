@@ -96,6 +96,7 @@ function fileElement(fe){
 	<tr>
 		<td width="140" bgcolor="<%=value_c%>" align="center">추가할 파일 수(최대 9개)</td>
 		<td width="150"><input type="text" size="2" name="add" value='<%=getParam(request, "add")%>'><input type="submit" value="확인"></td>
+		
 	</tr>
 	<tr><td>
 	</table>

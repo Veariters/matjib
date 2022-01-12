@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="board.R_BoardVO" %>
-<%@ page import="board.R_BoardDAO" %>
+<%@ page import="board.I_BoardVO" %>
+<%@ page import="board.I_BoardDAO" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ include file="view/color.jsp" %>
 <%@ page import="java.io.File" %>
@@ -20,8 +20,8 @@ request.setCharacterEncoding("utf-8");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	try{
-		R_BoardVO article = new R_BoardVO();
-		R_BoardDAO dbPro = R_BoardDAO.getInstance();
+		I_BoardVO article = new I_BoardVO();
+		I_BoardDAO dbPro = I_BoardDAO.getInstance();
 		
 		article = dbPro.getArticle(mi_num);
 %>
@@ -49,52 +49,52 @@ request.setCharacterEncoding("utf-8");
 		<table width="700" border="1" cellpadding="0" cellspacing="0" align="center" bgcolor="<%=bodyback_c%>">
 			<tr height="30">
 				<td align="center" width="140" bgcolor="<%=value_c%>">글번호</td>
-				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMr2_num() %></td>
+				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMi_num() %></td>
 				<td align="center" width="140" bgcolor="<%=value_c%>">조회수</td>
-				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMr2_readcount() %></td>
+				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMi_readcount() %></td>
 			</tr>
 			<tr height="30">
 				<td align="center" width="140" bgcolor="<%=value_c%>">작성자</td>
-				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMr2_writer() %></td>
+				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMi_writer() %></td>
 				<td align="center" width="140" bgcolor="<%=value_c%>">작성일</td>
-				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMr2_postdate() %></td>
+				<td align="center" width="140" bgcolor="<%=bodyback_c%>"><%=article.getMi_postdate() %></td>
 			</tr>
 			<tr>
 				<td align="center" width="140" bgcolor="<%=value_c%>">제목</td>
-				<td colspan="3" align="center" width="280" bgcolor="<%=bodyback_c%>"><%=article.getMr2_subject() %></td>
+				<td colspan="3" align="center" width="280" bgcolor="<%=bodyback_c%>"><%=article.getMi_subject() %></td>
 			</tr>
 			<tr>
 				<td colspan="4" height="200" valign="top">
 					<div>
 					<%
-					if(article.getMr2_image() != null){
+					if(article.getMi_image() != null){
 						
-						String [] imgArr = article.getMr2_image().split(",");
+						String [] imgArr = article.getMi_image().split(",");
 
 						for(int i = 0; i < imgArr.length; i++){
-							article.setMr2_image(imgArr[i]);
+							article.setMi_image(imgArr[i]);
 					
 					%>
-						<img src="image/<%=article.getMr2_image() %>" width="200" onerror=""><br>
+						<img src="image/<%=article.getMi_image() %>" width="200" onerror=""><br>
 						
 						<%} } %>
 					</div><br><br>
-					<%=article.getMr2_content() %>
+					<%=article.getMi_content() %>
 				</td>
 			</tr>
 
 			<tr height="30">
 				<td colspan="4" bgcolor="<%=value_c%>" align="right">
-					<input type="button" value="글쓰기" onClick="document.location.href='r_boardWriteForm.jsp'">
+					<input type="button" value="글쓰기" onClick="document.location.href='i_boardWriteForm.jsp'">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					
-					<input type="button" value="수정하기" onClick="document.location.href='r_boardUpdateForm.jsp?mi_num=<%=article.getMr2_num()%>&pageNum=<%=pageNum%>'">
+					<input type="button" value="수정하기" onClick="document.location.href='i_boardUpdateForm.jsp?mi_num=<%=article.getMi_num()%>&pageNum=<%=pageNum%>'">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					
-					<input type="button" value="삭제하기" onClick="document.location.href='r_boardDeleteForm.jsp?mi_num=<%=article.getMr2_num()%>&pageNum=<%=pageNum%>'">
+					<input type="button" value="삭제하기" onClick="document.location.href='i_boardDeleteForm.jsp?mi_num=<%=article.getMi_num()%>&pageNum=<%=pageNum%>'">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 
-					<input type="button" value="글목록" onClick="document.location.href='r_boardList.jsp?pageNum=<%=pageNum%>'">
+					<input type="button" value="글목록" onClick="document.location.href='i_boardList.jsp?pageNum=<%=pageNum%>'">
 				</td>
 				
 			</tr>

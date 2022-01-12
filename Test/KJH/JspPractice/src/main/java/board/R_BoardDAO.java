@@ -33,7 +33,7 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
-		int num = article.getMr2_num();
+		int num = article.getMr_num();
 
 		int number = 0; // 웹에 보이는 게시글의 개수를 나타내는 변수
 
@@ -43,17 +43,17 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 
 			con = ConnUtil.getConnection();
 
-			sql = "insert into r_board(mr2_num, mr2_writer, mr2_pass, mr2_subject, mr2_header, mr2_content, mr2_image, mr2_postdate) values(board_seq.nextval,?,?,?,?,?,?,?)";
+			sql = "insert into r_board(mr_num, mr_writer, mr_pass, mr_subject, mr_header, mr_content, mr_image, mr_postdate) values(board_seq.nextval,?,?,?,?,?,?,?)";
 
 			pstmt = con.prepareStatement(sql);
 
-			pstmt.setString(1, article.getMr2_writer());
-			pstmt.setString(2, article.getMr2_pass());
-			pstmt.setString(3, article.getMr2_subject());
-			pstmt.setString(4, article.getMr2_header());
-			pstmt.setString(5, article.getMr2_content());
-			pstmt.setString(6, article.getMr2_image());
-			pstmt.setTimestamp(7, article.getMr2_postdate());
+			pstmt.setString(1, article.getMr_writer());
+			pstmt.setString(2, article.getMr_pass());
+			pstmt.setString(3, article.getMr_subject());
+			pstmt.setString(4, article.getMr_header());
+			pstmt.setString(5, article.getMr_content());
+			pstmt.setString(6, article.getMr_image());
+			pstmt.setTimestamp(7, article.getMr_postdate());
 
 			pstmt.executeUpdate();
 		} catch (Exception s) {
@@ -173,7 +173,7 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 			
 			con = ConnUtil.getConnection();
 			
-			pstmt = con.prepareStatement("select count(*) from r_board where " + content + " = mr2_header");
+			pstmt = con.prepareStatement("select count(*) from r_board where " + content + " = mr_header");
 			
 			rs = pstmt.executeQuery();
 			
@@ -215,9 +215,9 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 
 			con = ConnUtil.getConnection();
 
-			pstmt = con.prepareStatement("select * from (select rownum rmr2_num, mr2_num, mr2_writer, mr2_pass, mr2_subject, "
-							+ "mr2_readcount, mr2_content, mr2_image, mr2_up, mr2_header,mr2_bcheck, mr2_postdate from (select * from r_board order by mr2_num desc)) "
-							+ "where rmr2_num>= ? and rmr2_num <= ?");
+			pstmt = con.prepareStatement("select * from (select rownum rmr_num, mr_num, mr_writer, mr_pass, mr_subject, "
+							+ "mr_readcount, mr_content, mr_image, mr_up, mr_header, mr_bcheck, mr_postdate from (select * from r_board order by mr_num desc)) "
+							+ "where rmr_num>= ? and rmr_num <= ?");
 
 			pstmt.setInt(1, start); // 나중에 수정3
 			pstmt.setInt(2, end);
@@ -231,15 +231,16 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 				do {
 
 					R_BoardVO article = new R_BoardVO();
-					article.setMr2_num(rs.getInt("mr2_num"));
-					article.setMr2_header(rs.getString("mr2_header"));
-					article.setMr2_writer(rs.getString("mr2_writer"));
-					article.setMr2_pass(rs.getString("mr2_pass"));
-					article.setMr2_subject(rs.getString("mr2_subject"));
-					article.setMr2_readcount(rs.getInt("mr2_readcount"));
-					article.setMr2_content(rs.getString("mr2_content"));
-					article.setMr2_image(rs.getString("mr2_image"));
-					article.setMr2_postdate(rs.getTimestamp("mr2_postdate"));
+					article.setMr_num(rs.getInt("mr_num"));
+					article.setMr_header(rs.getString("mr_header"));
+					article.setMr_writer(rs.getString("mr_writer"));
+					article.setMr_pass(rs.getString("mr_pass"));
+					article.setMr_subject(rs.getString("mr_subject"));
+					article.setMr_readcount(rs.getInt("mr_readcount"));
+					article.setMr_content(rs.getString("mr_content"));
+					article.setMr_image(rs.getString("mr_image"));
+					article.setMr_bcheck(rs.getInt("mr_bcheck"));
+					article.setMr_postdate(rs.getTimestamp("mr_postdate"));
 
 					articleList.add(article);
 				} while (rs.next());
@@ -267,7 +268,7 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 		return articleList;
 	}
 
-	public List<R_BoardVO> getArticles(String what, int start, int end) { // board table에서 가져올 메소드를
+	public List<R_BoardVO> getArticles(String header, int start, int end) { // board table에서 가져올 메소드를
 		// List로 구현 -> 나중에 수정1 검색할 내용을 리스트로받아옴(what-검색조건, content-검색내용,
 		// start-시작번호,end-끝번호)
 
@@ -281,9 +282,9 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 			con = ConnUtil.getConnection();
 
 			pstmt = con.prepareStatement(
-					"select * from (select rownum rmr2_num, mr2_num, mr2_writer, mr2_pass, mr2_subject, mr2_readcount, "
-							+ "mr2_content, mr2_image, mr2_up, mr2_header, mr2_bcheck, mr2_postdate from (select * from r_board where mr2_header ='"+what+"')) "
-							+"where rmr2_num>=? and rmr2_num<=?");
+					"select * from (select rownum rmr_num, mr_num, mr_writer, mr_pass, mr_subject, mr_readcount, "
+							+ "mr_content, mr_image, mr_up, mr_header, mr_bcheck, mr_postdate from (select * from r_board where mr_header ="+header+" order by mr_num desc)) "
+							+"where rmr_num>=? and rmr_num<=?");
 
 			
 			pstmt.setInt(1, start);
@@ -298,15 +299,16 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 				do {
 
 					R_BoardVO article = new R_BoardVO();
-					article.setMr2_num(rs.getInt("mr2_num"));
-					article.setMr2_header(rs.getString("mr2_header"));
-					article.setMr2_writer(rs.getString("mr2_writer"));
-					article.setMr2_pass(rs.getString("mr2_pass"));
-					article.setMr2_subject(rs.getString("mr2_subject"));
-					article.setMr2_readcount(rs.getInt("mr2_readcount"));
-					article.setMr2_content(rs.getString("mr2_content"));
-					article.setMr2_image(rs.getString("mr2_image"));
-					article.setMr2_postdate(rs.getTimestamp("mr2_postdate"));
+					article.setMr_num(rs.getInt("mr_num"));
+					article.setMr_header(rs.getString("mr_header"));
+					article.setMr_writer(rs.getString("mr_writer"));
+					article.setMr_pass(rs.getString("mr_pass"));
+					article.setMr_subject(rs.getString("mr_subject"));
+					article.setMr_readcount(rs.getInt("mr_readcount"));
+					article.setMr_content(rs.getString("mr_content"));
+					article.setMr_image(rs.getString("mr_image"));
+					article.setMr_bcheck(rs.getInt("mr_bcheck"));
+					article.setMr_postdate(rs.getTimestamp("mr_postdate"));
 
 					articleList.add(article);
 				} while (rs.next());
@@ -349,9 +351,9 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 			con = ConnUtil.getConnection();
 			
 			pstmt = con.prepareStatement(
-					"select * from (select rownum rmr2_num, mr2_num, mr2_writer, mr2_pass, mr2_subject, mr2_readcount, "
-							+ "mr2_content, mr2_image, mr2_up, mr2_header,mr2_bcheck, mr2_postdate from (select * from r_board where " + what + " like '%"+ content + "%' )) "
-							+ "where rmr2_num>=? and rmr2_num<=?");
+					"select * from (select rownum rmr_num, mr_num, mr_writer, mr_pass, mr_subject, mr_readcount, "
+							+ "mr_content, mr_image, mr_up, mr_header,mr_bcheck, mr_postdate from (select * from r_board where " + what + " like '%"+ content + "%' order by mr_num desc )) "
+							+ "where rmr_num>=? and rmr_num<=?");
 			
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
@@ -364,15 +366,16 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 				do {
 					
 					R_BoardVO article = new R_BoardVO();
-					article.setMr2_num(rs.getInt("mr2_num"));
-					article.setMr2_header(rs.getString("mr2_header"));
-					article.setMr2_writer(rs.getString("mr2_writer"));
-					article.setMr2_pass(rs.getString("mr2_pass"));
-					article.setMr2_subject(rs.getString("mr2_subject"));
-					article.setMr2_readcount(rs.getInt("mr2_readcount"));
-					article.setMr2_content(rs.getString("mr2_content"));
-					article.setMr2_image(rs.getString("mr2_image"));
-					article.setMr2_postdate(rs.getTimestamp("mr2_postdate"));
+					article.setMr_num(rs.getInt("mr_num"));
+					article.setMr_header(rs.getString("mr_header"));
+					article.setMr_writer(rs.getString("mr_writer"));
+					article.setMr_pass(rs.getString("mr_pass"));
+					article.setMr_subject(rs.getString("mr_subject"));
+					article.setMr_readcount(rs.getInt("mr_readcount"));
+					article.setMr_content(rs.getString("mr_content"));
+					article.setMr_image(rs.getString("mr_image"));
+					article.setMr_bcheck(rs.getInt("mr_bcheck"));
+					article.setMr_postdate(rs.getTimestamp("mr_postdate"));
 					
 					articleList.add(article);
 				} while (rs.next());
@@ -413,13 +416,13 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 
 			con = ConnUtil.getConnection();
 
-			pstmt = con.prepareStatement("update r_board set mr2_readcount = mr2_readcount+1 where mr2_num=?");
+			pstmt = con.prepareStatement("update r_board set mr_readcount = mr_readcount+1 where mr_num=?");
 
 			pstmt.setInt(1, num);
 
 			pstmt.executeUpdate();
 
-			pstmt = con.prepareStatement("select * from r_board where mr2_num = ?");
+			pstmt = con.prepareStatement("select * from r_board where mr_num = ?");
 
 			pstmt.setInt(1, num);
 
@@ -429,14 +432,14 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 
 				article = new R_BoardVO();
 
-				article.setMr2_num(rs.getInt("mr2_num"));
-				article.setMr2_writer(rs.getString("mr2_writer"));
-				article.setMr2_pass(rs.getString("mr2_pass"));
-				article.setMr2_subject(rs.getString("mr2_subject"));
-				article.setMr2_readcount(rs.getInt("mr2_readcount"));
-				article.setMr2_content(rs.getString("mr2_content"));
-				article.setMr2_image(rs.getString("mr2_image"));
-				article.setMr2_postdate(rs.getTimestamp("mr2_postdate"));
+				article.setMr_num(rs.getInt("mr_num"));
+				article.setMr_writer(rs.getString("mr_writer"));
+				article.setMr_pass(rs.getString("mr_pass"));
+				article.setMr_subject(rs.getString("mr_subject"));
+				article.setMr_readcount(rs.getInt("mr_readcount"));
+				article.setMr_content(rs.getString("mr_content"));
+				article.setMr_image(rs.getString("mr_image"));
+				article.setMr_postdate(rs.getTimestamp("mr_postdate"));
 
 			}
 		} catch (Exception s) {
@@ -476,7 +479,7 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 
 			con = ConnUtil.getConnection();
 
-			pstmt = con.prepareStatement("select * from r_board where mr2_num = ?");
+			pstmt = con.prepareStatement("select * from r_board where mr_num = ?");
 
 			pstmt.setInt(1, num);
 
@@ -485,14 +488,14 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 			if (rs.next()) {
 				article = new R_BoardVO();
 
-				article.setMr2_num(rs.getInt("mr2_num"));
-				article.setMr2_writer(rs.getString("mr2_writer"));
-				article.setMr2_pass(rs.getString("mr2_pass"));
-				article.setMr2_subject(rs.getString("mr2_subject"));
-				article.setMr2_readcount(rs.getInt("mr2_readcount"));
-				article.setMr2_image(rs.getString("mr2_image"));
-				article.setMr2_content(rs.getString("mr2_content"));
-				article.setMr2_postdate(rs.getTimestamp("mr2_postdate"));
+				article.setMr_num(rs.getInt("mr_num"));
+				article.setMr_writer(rs.getString("mr_writer"));
+				article.setMr_pass(rs.getString("mr_pass"));
+				article.setMr_subject(rs.getString("mr_subject"));
+				article.setMr_readcount(rs.getInt("mr_readcount"));
+				article.setMr_image(rs.getString("mr_image"));
+				article.setMr_content(rs.getString("mr_content"));
+				article.setMr_postdate(rs.getTimestamp("mr_postdate"));
 			}
 
 		} catch (Exception s) {
@@ -533,25 +536,25 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 
 			con = ConnUtil.getConnection();
 
-			pstmt = con.prepareStatement("select mr2_pass from r_board where mr2_writer = ?");
+			pstmt = con.prepareStatement("select mr_pass from r_board where mr_writer = ?");
 
-			pstmt.setString(1, article.getMr2_writer());
+			pstmt.setString(1, article.getMr_writer());
 
 			rs = pstmt.executeQuery();
 			// 여기까지는 성공
 			if (rs.next()) {
-				dbpass = rs.getString("mr2_pass");
+				dbpass = rs.getString("mr_pass");
 
-				if (dbpass.equals(article.getMr2_pass())) { // 비밀번호가 일치할 경우 --> 수정 처리
-					sql = "update r_board set  mr2_subject=?, mr2_content=?, mr2_image=?, mr2_postdate=? where mr2_writer=?";
+				if (dbpass.equals(article.getMr_pass())) { // 비밀번호가 일치할 경우 --> 수정 처리
+					sql = "update r_board set  mr_subject=?, mr_content=?, mr_image=?, mr_postdate=? where mr_writer=?";
 
 					pstmt = con.prepareStatement(sql);
 
-					pstmt.setString(1, article.getMr2_subject());
-					pstmt.setString(2, article.getMr2_content());
-					pstmt.setString(3, article.getMr2_image());
-					pstmt.setTimestamp(4, article.getMr2_postdate());
-					pstmt.setString(5, article.getMr2_writer());
+					pstmt.setString(1, article.getMr_subject());
+					pstmt.setString(2, article.getMr_content());
+					pstmt.setString(3, article.getMr_image());
+					pstmt.setTimestamp(4, article.getMr_postdate());
+					pstmt.setString(5, article.getMr_writer());
 					pstmt.executeUpdate();
 
 					result = 1;
@@ -599,7 +602,7 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 
 			con = ConnUtil.getConnection();
 
-			pstmt = con.prepareStatement("select mr2_pass from r_board where mr2_num = ?");
+			pstmt = con.prepareStatement("select mr_pass from r_board where mr_num = ?");
 
 			pstmt.setInt(1, num);
 
@@ -607,11 +610,11 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 
 			if (rs.next()) {
 
-				dbpass = rs.getString("mr2_pass");
+				dbpass = rs.getString("mr_pass");
 
 				if (dbpass.equals(pass)) { // 비밀번호가 일치할 경우 --> 삭제 처리
 
-					sql = "delete from r_board where mr2_num=?";
+					sql = "delete from r_board where mr_num=?";
 
 					pstmt = con.prepareStatement(sql);
 
