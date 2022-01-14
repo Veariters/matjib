@@ -43,7 +43,7 @@ count = dbPro.getArticleCount(); // 전체글 수
 
 if(searchText == null){
 	if(searchWhat != null){
-		System.out.println("여기가적용123");
+		
 		count = dbPro.getArticleCount(searchHeader);
 		System.out.println(count);
 		if(count > 0){
@@ -55,7 +55,7 @@ if(searchText == null){
 	else{
 		count = dbPro.getArticleCount();
 		if(count > 0) {
-			System.out.println("여기가적용2");
+	
 			articleList = dbPro.getArticles(startRow, endRow);
 		}
 	}
@@ -63,7 +63,7 @@ if(searchText == null){
 else{	
 	count = dbPro.getArticleCount(searchWhat, searchText);
 	if(count > 0) {
-		System.out.println("여기가적용3");
+	
 		articleList = dbPro.getArticles(searchWhat, searchText, startRow, endRow );
 	}
 }

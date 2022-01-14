@@ -44,7 +44,6 @@ function fileElement(fe){
 	fe.submit();
 }
 
-
 </script>
 </head>
 <%
@@ -103,7 +102,12 @@ int num = Integer.parseInt(request.getParameter("mf_num"));
 				<td width="150"><input type="text" size="2" name="add" value='<%=getParam(request, "add")%>'><input type="submit" value="확인"></td>
 				<td><input type="hidden" name="mf_pass" value="<%=article.getMf_pass() %>"></td>
 			</tr>
-			
+			<tr>
+				<td colspan="2" align="center" bgcolor="<%=value_c%>">
+				<input type="submit" value="글수정"> <input type="reset" value="다시작성"> 
+				<input type="button" value="목록" onClick="document.location='r_boardList.jsp?pageNum=<%=pageNum%>'">
+				</td>
+			</tr>
 		</table>
 		<%
 	int filecnt = 0;

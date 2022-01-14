@@ -37,8 +37,8 @@ request.setCharacterEncoding("utf-8");
 <nav id="topMenu" align="center">
 	<ul>
 		<li><a href="i_boardList.jsp" class="menuLink">공지사항</a></li>
-		<li><a href="#" class="menuLink">자유게시판</a></li>
-		<li><a href="#" class="menuLink">맛집 리뷰 게시판</a></li>
+		<li><a href="f_boardList.jsp" class="menuLink">자유게시판</a></li>
+		<li><a href="r_boardList.jsp" class="menuLink">맛집 리뷰 게시판</a></li>
 		<li><a href="#" class="menuLink">회원 메뉴</a></li>
 	</ul>
 </nav>
@@ -67,7 +67,7 @@ request.setCharacterEncoding("utf-8");
 				<td colspan="4" height="200" valign="top">
 					<div>
 					<%
-					if(article.getMr_image() != null){
+					if(!article.getMr_image().equals("")){
 						
 						String [] imgArr = article.getMr_image().split(",");
 
@@ -77,7 +77,8 @@ request.setCharacterEncoding("utf-8");
 					%>
 						<img src="image/<%=article.getMr_image() %>" width="200"><br>
 						
-						<%} } %>
+						<%} } else{%>
+						<%} %>
 					</div><br><br>
 					<%=article.getMr_content() %>
 				</td>

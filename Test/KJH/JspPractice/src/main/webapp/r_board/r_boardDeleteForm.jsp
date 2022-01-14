@@ -3,7 +3,7 @@
     
 <%@ include file = "view/color.jsp" %>
 <%
-	int num = Integer.parseInt(request.getParameter("mr2_num"));
+	int num = Integer.parseInt(request.getParameter("mr_num"));
 	String pageNum = request.getParameter("pageNum");
 %>
     

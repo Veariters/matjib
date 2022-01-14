@@ -31,7 +31,8 @@ System.out.println("============ uploadFilePath = " + realFolder);
 	
 
  MultipartRequest multi = new MultipartRequest(request, realFolder, size, encType, new DefaultFileRenamePolicy());		//파일업로드를 직접적으로 담당 		
-String mf_image="";
+
+ String mf_image="";
  String mf_writer = multi.getParameter("mf_writer");
  String mf_pass = multi.getParameter("mf_pass");
  String mf_subject = multi.getParameter("mf_subject");
@@ -60,7 +61,6 @@ if(Integer.parseInt(add) > 0){
 	String mf_postdate = request.getParameter("mf_postdate");
 	F_BoardVO article = new F_BoardVO();
 	F_BoardDAO dbPro = F_BoardDAO.getInstance();
-	
 	
 	
 article.setMf_writer(mf_writer);

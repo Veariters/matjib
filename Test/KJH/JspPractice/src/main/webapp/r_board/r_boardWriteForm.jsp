@@ -90,8 +90,8 @@ function stationChoice(s){
 <nav id="topMenu" align="center">
 	<ul>
 		<li><a href="i_boardList.jsp" class="menuLink">공지사항</a></li>
-		<li><a href="#" class="menuLink">자유게시판</a></li>
-		<li><a href="#" class="menuLink">맛집 리뷰 게시판</a></li>
+		<li><a href="f_boardList.jsp" class="menuLink">자유게시판</a></li>
+		<li><a href="r_boardList.jsp" class="menuLink">맛집 리뷰 게시판</a></li>
 		<li><a href="#" class="menuLink">회원 메뉴</a></li>
 	</ul>
 </nav>
@@ -126,7 +126,7 @@ function stationChoice(s){
 		<td width="140" bgcolor="<%=value_c%>" align="center">역이름 선택</td>
 		<td width="330" height="10">
 			<select name="mr_header" id="mr_header" value='<%=getParam(request, "mr_header") %>'>
-				<option value="" align="center">--------역 이름을 선택하세요-------</option>
+				<option value="" align="center" selected="selected">--------역 이름을 선택하세요-------</option>
 			</select></td>
 	</tr>
 	<tr>
@@ -148,6 +148,8 @@ function stationChoice(s){
 	if(request.getParameter("add") != null){
 		
 		filecnt = Integer.parseInt(request.getParameter("add"));
+	}else{
+		filecnt = 0;
 	}
 	%>
 	<form action="r_boardWriteProc.jsp" encType="multipart/form-data" method="post">
@@ -158,13 +160,26 @@ function stationChoice(s){
 		<input type="hidden" name="mr_header" value="<%=getParam(request, "mr_header") %>">
 		<input type="hidden" name="mr_content" value="<%=getParam(request, "mr_content") %>">
 		<input type="hidden" name="add" value="<%=getParam(request, "add") %>">
-	<% 
-	for(int i = 0; i < filecnt; i++){
-		if(filecnt > 9){
-			filecnt = 9;
-		}
-	
-	%>
+			<%
+			if (Integer.parseInt(request.getParameter("add")) > 0) {
+			%>
+			<input type="hidden" name="add" value="<%=getParam(request, "add")%>">
+			<%
+			} else {
+			%>
+			<script type="text/javascript">
+				alert("이미지 개수를 입력해주세요(없을경우 숫자 0입력).");
+				history.go(-1);
+			</script>
+			<%
+			}
+			%>
+			<%
+			for (int i = 0; i < filecnt; i++) {
+				if (filecnt > 9) {
+					filecnt = 9;
+				}
+			%>
 	<%=i+1 %> 번째 파일 선택 : <input type="file" name="mr_image<%=i+1%>"><br>
 	
 	<%} %>
@@ -172,7 +187,8 @@ function stationChoice(s){
 	<tr>
 		<td colspan="2" align="center" bgcolor="<%=value_c%>"><input type="submit" value="글쓰기">
 															  <input type="reset" value="다시작성">
-															  <input type="button" value="목록" onClick="window.location='r_boardList.jsp'"></td>
+															  <input type="button" value="목록" onClick="window.location='r_boardList.jsp'">
+		</td>
 	</tr>
 	</table>
 </form>

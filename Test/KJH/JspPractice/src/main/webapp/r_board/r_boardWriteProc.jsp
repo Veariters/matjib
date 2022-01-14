@@ -16,9 +16,6 @@ response.setCharacterEncoding("utf-8");
 ArrayList saveFile = new ArrayList();		// 저장될 파일 이름
 ArrayList oldFile = new ArrayList(); 		// 실제 파일 이름
 
-
-
-
 String realFolder = "";
 String saveFolder = "/r_board/image";					// 학원에서 할 때
 //String saveFolder = "C:/ADevelop/jspproject/JspPractice/src/main/webapp/i_board/image";					// 집에서 할 때
@@ -60,13 +57,6 @@ String mr_image = "";
  
  
  String mr_postdate = request.getParameter("mr_postdate");
-	
-	
- /* File file = multi.getFile("mi_image");
-	long filesize = 0;
-	if ( file != null ) {
-		filesize = file.length();
-	} */
 	
 	R_BoardVO article = new R_BoardVO();
 	R_BoardDAO dbPro = R_BoardDAO.getInstance(); 

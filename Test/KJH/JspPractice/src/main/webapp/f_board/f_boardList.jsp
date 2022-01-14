@@ -8,7 +8,6 @@
 <%@ include file="view/color.jsp" %>
 
 <%
-// 한 페이지에 보여줄 목록 수 지정
 int pageSize = 5;
 
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
