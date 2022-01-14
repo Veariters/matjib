@@ -61,7 +61,7 @@ function fileElement(fe){
 		<option value="Japaness">Japaness</option>
 	</select>
 </form><br>
-<div align="center"><font size="6em"><b>맛집 노선도</b></font><br>
+<div align="center"></div><font size="6em"><b>맛집 노선도</b></font><br>
 <hr color="skyblue">
 <nav id="topMenu" align="center">
 	<ul>
@@ -109,6 +109,8 @@ function fileElement(fe){
 	if(request.getParameter("add") != null){
 		
 		filecnt = Integer.parseInt(request.getParameter("add"));
+	}else{
+		filecnt = 0;
 	}
 	%>
 	<form action="i_boardWriteProc.jsp" encType="multipart/form-data" method="post">
@@ -116,7 +118,15 @@ function fileElement(fe){
 		<input type="hidden" name="mi_pass" value="<%=getParam(request, "mi_pass") %>">
 		<input type="hidden" name="mi_subject" value="<%=getParam(request, "mi_subject") %>">
 		<input type="hidden" name="mi_content" value="<%=getParam(request, "mi_content") %>">
+		<%if(Integer.parseInt(request.getParameter("add")) > 0){
+			 %>
 		<input type="hidden" name="add" value="<%=getParam(request, "add") %>">
+		<%}else{ %>
+<script type="text/javascript">
+alert("이미지 개수를 입력해주세요(없을경우 숫자 0입력).");
+history.go(-1);
+</script>
+<%} %>
 	<% 
 	for(int i = 0; i < filecnt; i++){
 		if(filecnt > 9){

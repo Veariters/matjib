@@ -93,7 +93,7 @@ int num = Integer.parseInt(request.getParameter("mi_num"));
 			</tr>
 			<tr>
 				<td width="70" bgcolor="<%=value_c%>" align="center">내용</td>
-				<td width="330" align="left"><textarea rows="14" cols="50" name="mi_content"><%=article.getMi_content()%>"</textarea></td>
+				<td width="330" align="left"><textarea rows="14" cols="50" name="mi_content"><%=article.getMi_content()%></textarea></td>
 			</tr>
 			<tr>
 				<td width="70" bgcolor="<%=value_c%>" align="center">기존파일</td>
@@ -102,7 +102,7 @@ int num = Integer.parseInt(request.getParameter("mi_num"));
 			<tr>
 		<td width="140" bgcolor="<%=value_c%>" align="center">추가할 파일 수(최대 9개)</td>
 		<td width="150"><input type="text" size="2" name="add" value='<%=getParam(request, "add")%>'><input type="submit" value="확인"></td>
-		
+		<td><input type="hidden" name="mi_pass" value="<%=article.getMi_pass() %>"></td>
 	</tr>
 			
 		</table>
@@ -124,7 +124,7 @@ int num = Integer.parseInt(request.getParameter("mi_num"));
 	<table>
 	<tr>
 				<td width="70" bgcolor="<%=value_c%>" align="center">비밀번호</td>
-				<td width="330" align="left"><input type="password" size="20" maxlength="20" name="mi_pass" value="<%=getParam(request,"mi_pass")%>"></td>
+				<td width="330" align="left"><input type="password" size="20" maxlength="20" name="mi_pass"></td>
 			</tr></table>
 	</form>	
 	<form action="i_boardUpdateProc.jsp?pageNum=<%=pageNum%>" encType="multipart/form-data" method="post">
@@ -133,7 +133,7 @@ int num = Integer.parseInt(request.getParameter("mi_num"));
 		<input type="hidden" name="mi_subject" value="<%=getParam(request, "mi_subject") %>">
 		<input type="hidden" name="mi_content" value="<%=getParam(request, "mi_content") %>">
 		<input type="hidden" name="add" value="<%=getParam(request, "add") %>">	
-		<input type="hidden" name="mi_pass" value="<%=getParam(request, "mi_pass") %>">
+		
 		<% 
 	for(int i = 0; i < filecnt; i++){
 		if(filecnt > 9){

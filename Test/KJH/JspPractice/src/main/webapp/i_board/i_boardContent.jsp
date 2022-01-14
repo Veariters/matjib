@@ -67,17 +67,19 @@ request.setCharacterEncoding("utf-8");
 				<td colspan="4" height="200" valign="top">
 					<div>
 					<%
-					if(article.getMi_image() != null){
 						
 						String [] imgArr = article.getMi_image().split(",");
 
 						for(int i = 0; i < imgArr.length; i++){
 							article.setMi_image(imgArr[i]);
 					
+					if(article.getMi_image().equals("")){
 					%>
-						<img src="image/<%=article.getMi_image() %>" width="200" onerror=""><br>
+						<img src="image/<%=article.getMi_image() %>" width="200"><br>
 						
-						<%} } %>
+						<%}else if(article.getMi_image().equals("")){%>
+							<div>asdf</div>
+						<% }}%>
 					</div><br><br>
 					<%=article.getMi_content() %>
 				</td>

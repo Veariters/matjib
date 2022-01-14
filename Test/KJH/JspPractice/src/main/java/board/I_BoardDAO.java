@@ -424,11 +424,11 @@ public class I_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 			// 여기까지는 성공
 			if (rs.next()) {
 				dbpass = rs.getString("mi_pass");
-System.out.println("getMi_pass()1: " + article.getMi_pass());
+
 
 				if (dbpass.equals(article.getMi_pass())) { // 비밀번호가 일치할 경우 --> 수정 처리
 					sql = "update i_board set mi_subject=?, mi_content=?, mi_image=?, mi_postdate=? where mi_writer=?";
-System.out.println("getMi_pass()2: " + article.getMi_pass());
+
 					pstmt = con.prepareStatement(sql);
 
 					pstmt.setString(1, article.getMi_subject());

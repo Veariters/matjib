@@ -36,28 +36,25 @@ String mi_image = "";
  String mi_subject = multi.getParameter("mi_subject");
  String mi_content = multi.getParameter("mi_content");
  String add = multi.getParameter("add");
-System.out.println("mi_pass : " + mi_pass);
 
  if(Integer.parseInt(add) > 0){
 	 for(int i = 0; i < Integer.parseInt(add); i++){
 		 mi_image += (multi.getFilesystemName("mi_image"+(i+1))+ ",");
 		 
-		 mi_image = mi_image.substring(0, mi_image.length()-1);
-		 
-		 Enumeration e = multi.getFileNames();
-		 
-		 while(e.hasMoreElements()){
-			 String n = (String)e.nextElement();
-			 saveFile.add(multi.getFilesystemName(n));
-			 oldFile.add(multi.getOriginalFileName(n));
 		 }
-	 }
 	 }else{
 		 mi_image="";
 	 }
 	 
+	 mi_image = mi_image.substring(0, mi_image.length()-1);
 	 
-	
+	 Enumeration e = multi.getFileNames();
+	 
+	 while(e.hasMoreElements()){
+		 String n = (String)e.nextElement();
+		 saveFile.add(multi.getFilesystemName(n));
+		 oldFile.add(multi.getOriginalFileName(n));
+	 }
  
 	String mi_postdate = request.getParameter("mi_postdate");
 	I_BoardVO article = new I_BoardVO();
