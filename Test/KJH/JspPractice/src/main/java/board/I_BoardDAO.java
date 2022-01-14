@@ -403,44 +403,47 @@ public class I_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 
 	public int updateArticle(I_BoardVO article) { // 데이터베이스에서 실제 수정 처리가 되도록 메서드구현.(글이 없을 경우에는 -1반환, 수정 성공시 1반환, 수정 실패시 0
 													// 반환
-
+	
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		String dbpass = "";
 		String sql = "";
 
 		int result = -1;
-
+	
 		try {
 
 			con = ConnUtil.getConnection();
 
-			pstmt = con.prepareStatement("select mi_pass from i_board where mi_writer = ?");
+			pstmt = con.prepareStatement("select mi_pass from i_board where mi_writer=?");
 
 			pstmt.setString(1, article.getMi_writer());
-
 			rs = pstmt.executeQuery();
 			// 여기까지는 성공
 			if (rs.next()) {
 				dbpass = rs.getString("mi_pass");
+System.out.println("getMi_pass()1: " + article.getMi_pass());
 
 				if (dbpass.equals(article.getMi_pass())) { // 비밀번호가 일치할 경우 --> 수정 처리
-					sql = "update i_board set  mi_subject=?, mi_content=?, mi_image=?, mi_postdate=? where mi_writer=?";
-
+					sql = "update i_board set mi_subject=?, mi_content=?, mi_image=?, mi_postdate=? where mi_writer=?";
+System.out.println("getMi_pass()2: " + article.getMi_pass());
 					pstmt = con.prepareStatement(sql);
 
 					pstmt.setString(1, article.getMi_subject());
 					pstmt.setString(2, article.getMi_content());
 					pstmt.setString(3, article.getMi_image());
 					pstmt.setTimestamp(4, article.getMi_postdate());
+					System.out.println("여기가문제");
 					pstmt.setString(5, article.getMi_writer());
+					System.out.println("mi_writer : " + article.getMi_writer());
 					pstmt.executeUpdate();
 
 					result = 1;
 
 				} else {
+				
 					result = 0;
 				}
 

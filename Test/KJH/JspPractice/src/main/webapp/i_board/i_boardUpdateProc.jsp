@@ -5,13 +5,18 @@
 <%@ page import="board.I_BoardDAO" %>
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.io.File" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Enumeration" %>
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@ page import="com.oreilly.servlet.MultipartRequest"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 
 <%
 request.setCharacterEncoding("utf-8");
-out.println("여기까지성공1");
+response.setCharacterEncoding("utf-8");
+ArrayList saveFile = new ArrayList();		// 저장될 파일 이름
+ArrayList oldFile = new ArrayList(); 		// 실제 파일 이름
 
 String realFolder = "";
 String saveFolder = "/i_board/image";					// 학원에서 할 때
@@ -25,24 +30,38 @@ System.out.println("============ uploadFilePath = " + realFolder);
 	
 
  MultipartRequest multi = new MultipartRequest(request, realFolder, size, encType, new DefaultFileRenamePolicy());		//파일업로드를 직접적으로 담당 		
-
+String mi_image = "";
  String mi_writer = multi.getParameter("mi_writer");
  String mi_pass = multi.getParameter("mi_pass");
  String mi_subject = multi.getParameter("mi_subject");
  String mi_content = multi.getParameter("mi_content");
- String mi_image = multi.getFilesystemName("mi_image");
- String mi_postdate = request.getParameter("mi_postdate");
+ String add = multi.getParameter("add");
+System.out.println("mi_pass : " + mi_pass);
 
- File file = multi.getFile("mi_image");
-	long filesize = 0;
-	if ( file != null ) {
-		filesize = file.length();
-	}
+ if(Integer.parseInt(add) > 0){
+	 for(int i = 0; i < Integer.parseInt(add); i++){
+		 mi_image += (multi.getFilesystemName("mi_image"+(i+1))+ ",");
+		 
+		 mi_image = mi_image.substring(0, mi_image.length()-1);
+		 
+		 Enumeration e = multi.getFileNames();
+		 
+		 while(e.hasMoreElements()){
+			 String n = (String)e.nextElement();
+			 saveFile.add(multi.getFilesystemName(n));
+			 oldFile.add(multi.getOriginalFileName(n));
+		 }
+	 }
+	 }else{
+		 mi_image="";
+	 }
+	 
+	 
 	
+ 
+	String mi_postdate = request.getParameter("mi_postdate");
 	I_BoardVO article = new I_BoardVO();
 	I_BoardDAO dbPro = I_BoardDAO.getInstance();
-	
-	
 	
 article.setMi_writer(mi_writer);
 article.setMi_pass(mi_pass);
@@ -53,7 +72,6 @@ article.setMi_postdate(new Timestamp(System.currentTimeMillis()));
 
 
 String pageNum = request.getParameter("pageNum");
-
 
 int check = dbPro.updateArticle(article);
 

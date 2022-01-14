@@ -1,7 +1,7 @@
 <%@page import="org.apache.commons.collections4.bag.SynchronizedSortedBag"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="board.R2_BoardVO" %>
+<%@ page import="board.R_BoardVO" %>
 <%@ page import="board.R_BoardDAO" %>
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.io.File" %>
@@ -26,32 +26,32 @@ System.out.println("============ uploadFilePath = " + realFolder);
 
  MultipartRequest multi = new MultipartRequest(request, realFolder, size, encType, new DefaultFileRenamePolicy());		//파일업로드를 직접적으로 담당 		
 
- String mr2_writer = multi.getParameter("mr2_writer");
- String mr2_pass = multi.getParameter("mr2_pass");
- String mr2_subject = multi.getParameter("mr2_subject");
- String mr2_content = multi.getParameter("mr2_content");
- String mr2_image = multi.getFilesystemName("mr2_image");
- String mr2_postdate = request.getParameter("mr2_postdate");
+ String mr_writer = multi.getParameter("mr_writer");
+ String mr_pass = multi.getParameter("mr_pass");
+ String mr_subject = multi.getParameter("mr_subject");
+ String mr_content = multi.getParameter("mr_content");
+ String mr_image = multi.getFilesystemName("mr_image");
+ String mr_postdate = request.getParameter("mr_postdate");
 
- File file = multi.getFile("mr2_image");
+ File file = multi.getFile("mr_image");
 	long filesize = 0;
 	if ( file != null ) {
 		filesize = file.length();
 	}
 	
-	R2_BoardVO article = new R2_BoardVO();
+	R_BoardVO article = new R_BoardVO();
 	R_BoardDAO dbPro = R_BoardDAO.getInstance();
 	
+	System.out.println("여기까지2");
 	
-	
-article.setMr2_writer(mr2_writer);
-article.setMr2_pass(mr2_pass);
-article.setMr2_subject(mr2_subject);
-article.setMr2_content(mr2_content);
-article.setMr2_image(mr2_image);
-article.setMr2_postdate(new Timestamp(System.currentTimeMillis()));
+article.setMr_writer(mr_writer);
+article.setMr_pass(mr_pass);
+article.setMr_subject(mr_subject);
+article.setMr_content(mr_content);
+article.setMr_image(mr_image);
+article.setMr_postdate(new Timestamp(System.currentTimeMillis()));
 
-
+System.out.println("여기까지3");
 String pageNum = request.getParameter("pageNum");
 
 

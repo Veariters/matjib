@@ -43,17 +43,18 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 
 			con = ConnUtil.getConnection();
 
-			sql = "insert into r_board(mr_num, mr_writer, mr_pass, mr_subject, mr_header, mr_content, mr_image, mr_postdate) values(board_seq.nextval,?,?,?,?,?,?,?)";
+			sql = "insert into r_board(mr_num, mr_writer, mr_pass, mr_subject, mr_bcheck, mr_header, mr_content, mr_image, mr_postdate) values(board_seq.nextval,?,?,?,?,?,?,?,?)";
 
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, article.getMr_writer());
 			pstmt.setString(2, article.getMr_pass());
 			pstmt.setString(3, article.getMr_subject());
-			pstmt.setString(4, article.getMr_header());
-			pstmt.setString(5, article.getMr_content());
-			pstmt.setString(6, article.getMr_image());
-			pstmt.setTimestamp(7, article.getMr_postdate());
+			pstmt.setInt(4, article.getMr_bcheck());
+			pstmt.setString(5, article.getMr_header());
+			pstmt.setString(6, article.getMr_content());
+			pstmt.setString(7, article.getMr_image());
+			pstmt.setTimestamp(8, article.getMr_postdate());
 
 			pstmt.executeUpdate();
 		} catch (Exception s) {
@@ -130,6 +131,7 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 
 			pstmt = con.prepareStatement("select count(*) from r_board where " + what + " like '%" + content + "%'");
 
+			
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
@@ -173,7 +175,52 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 			
 			con = ConnUtil.getConnection();
 			
-			pstmt = con.prepareStatement("select count(*) from r_board where " + content + " = mr_header");
+			pstmt = con.prepareStatement("select count(*) from r_board where mr_header  like '%" + content + "%'");
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				x = rs.getInt(1);
+			}
+			
+		} catch (Exception s) {
+			System.out.println("Exception : " + s);
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException s1) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException s2) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException s3) {
+				}
+		}
+		
+		return x;
+	}
+	
+	
+	public int getArticleCount(int bcheck) {
+		// 말머리로 검색한 내용이 몇개인지 알아보는 메소드를 오버로딩으로 구현(검색조건-what, 검색내용-content로 변수설정)
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int x = 0;
+		
+		try {
+			
+			con = ConnUtil.getConnection();
+			
+			pstmt = con.prepareStatement("select count(*) from r_board where mr_bcheck=" + bcheck);
 			
 			rs = pstmt.executeQuery();
 			
@@ -241,7 +288,6 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 					article.setMr_image(rs.getString("mr_image"));
 					article.setMr_bcheck(rs.getInt("mr_bcheck"));
 					article.setMr_postdate(rs.getTimestamp("mr_postdate"));
-
 					articleList.add(article);
 				} while (rs.next());
 			}
@@ -283,8 +329,8 @@ public class R_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 
 			pstmt = con.prepareStatement(
 					"select * from (select rownum rmr_num, mr_num, mr_writer, mr_pass, mr_subject, mr_readcount, "
-							+ "mr_content, mr_image, mr_up, mr_header, mr_bcheck, mr_postdate from (select * from r_board where mr_header ="+header+" order by mr_num desc)) "
-							+"where rmr_num>=? and rmr_num<=?");
+												+ "mr_content, mr_image, mr_up, mr_header,mr_bcheck, mr_postdate from (select * from r_board where mr_header like '%"+ header + "%' order by mr_num desc )) "
+												+ "where rmr_num>=? and rmr_num<=?");
 
 			
 			pstmt.setInt(1, start);
