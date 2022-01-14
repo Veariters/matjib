@@ -11,7 +11,6 @@ public class F_BoardVO {
 	private int mf_readcount;
 	private String mf_content;
 	private String mf_image;
-	private int mf_up;
 	private Timestamp mf_postdate;
 	
 	public F_BoardVO() {
@@ -74,14 +73,6 @@ public class F_BoardVO {
 		this.mf_image = mf_image;
 	}
 
-	public int getMf_up() {
-		return mf_up;
-	}
-
-	public void setMf_up(int mf_up) {
-		this.mf_up = mf_up;
-	}
-
 	public Timestamp getMf_postdate() {
 		return mf_postdate;
 	}
@@ -89,6 +80,6 @@ public class F_BoardVO {
 	public void setMf_postdate(Timestamp mf_postdate) {
 		this.mf_postdate = mf_postdate;
 	}
-	
+
 	
 }

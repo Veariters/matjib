@@ -16,9 +16,6 @@ response.setCharacterEncoding("utf-8");
 ArrayList saveFile = new ArrayList();		// 저장될 파일 이름
 ArrayList oldFile = new ArrayList(); 		// 실제 파일 이름
 
-
-
-
 String realFolder = "";
 String saveFolder = "/f_board/image";					// 학원에서 할 때
 //String saveFolder = "C:/ADevelop/jspproject/JspPractice/src/main/webapp/i_board/image";					// 집에서 할 때
@@ -58,13 +55,6 @@ String mf_image = "";
  
  
  String mf_postdate = request.getParameter("mf_postdate");
-	
-	
- /* File file = multi.getFile("mi_image");
-	long filesize = 0;
-	if ( file != null ) {
-		filesize = file.length();
-	} */
 	
 	F_BoardVO article = new F_BoardVO();
 	F_BoardDAO dbPro = F_BoardDAO.getInstance(); 

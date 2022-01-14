@@ -57,7 +57,6 @@ int num = Integer.parseInt(request.getParameter("mi_num"));
 		
 		I_BoardVO article = dbPro.updateGetArticle(num);
 %>	
-
 <body bgcolor="<%=bodyback_c%>">
 <form name="chooseLanguage" align="right">
 	<select name="Language">
@@ -70,8 +69,8 @@ int num = Integer.parseInt(request.getParameter("mi_num"));
 <nav id="topMenu" align="center">
 	<ul>
 		<li><a href="i_boardList.jsp" class="menuLink">공지사항</a></li>
-		<li><a href="#" class="menuLink">자유게시판</a></li>
-		<li><a href="#" class="menuLink">맛집 리뷰 게시판</a></li>
+		<li><a href="f_boardList.jsp" class="menuLink">자유게시판</a></li>
+		<li><a href="r_boardList.jsp" class="menuLink">맛집 리뷰 게시판</a></li>
 		<li><a href="#" class="menuLink">회원 메뉴</a></li>
 	</ul>
 </nav>
@@ -100,10 +99,10 @@ int num = Integer.parseInt(request.getParameter("mi_num"));
 				<td><%=article.getMi_image() %></td>
 			</tr>
 			<tr>
-		<td width="140" bgcolor="<%=value_c%>" align="center">추가할 파일 수(최대 9개)</td>
-		<td width="150"><input type="text" size="2" name="add" value='<%=getParam(request, "add")%>'><input type="submit" value="확인"></td>
-		<td><input type="hidden" name="mi_pass" value="<%=article.getMi_pass() %>"></td>
-	</tr>
+				<td width="140" bgcolor="<%=value_c%>" align="center">추가할 파일 수(최대 9개)</td>
+				<td width="150"><input type="text" size="2" name="add" value='<%=getParam(request, "add")%>'><input type="submit" value="확인"></td>
+				<td><input type="hidden" name="mi_pass" value="<%=article.getMi_pass() %>"></td>
+			</tr>
 			
 		</table>
 		
@@ -122,10 +121,10 @@ int num = Integer.parseInt(request.getParameter("mi_num"));
 	%>
 		
 	<table>
-	<tr>
-				<td width="70" bgcolor="<%=value_c%>" align="center">비밀번호</td>
-				<td width="330" align="left"><input type="password" size="20" maxlength="20" name="mi_pass"></td>
-			</tr></table>
+		<tr>
+			<td width="70" bgcolor="<%=value_c%>" align="center">비밀번호</td>
+			<td width="330" align="left"><input type="password" size="20" maxlength="20" name="mi_pass"></td>
+		</tr></table>
 	</form>	
 	<form action="i_boardUpdateProc.jsp?pageNum=<%=pageNum%>" encType="multipart/form-data" method="post">
 		<input type="hidden" name="mi_writer" value="<%=getParam(request, "mi_writer") %>">

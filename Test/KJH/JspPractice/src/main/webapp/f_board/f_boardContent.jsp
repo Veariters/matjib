@@ -37,8 +37,8 @@ request.setCharacterEncoding("utf-8");
 <nav id="topMenu" align="center">
 	<ul>
 		<li><a href="i_boardList.jsp" class="menuLink">공지사항</a></li>
-		<li><a href="#" class="menuLink">자유게시판</a></li>
-		<li><a href="#" class="menuLink">맛집 리뷰 게시판</a></li>
+		<li><a href="f_boardList.jsp" class="menuLink">자유게시판</a></li>
+		<li><a href="r_boardList.jsp" class="menuLink">맛집 리뷰 게시판</a></li>
 		<li><a href="#" class="menuLink">회원 메뉴</a></li>
 	</ul>
 </nav>
@@ -66,8 +66,8 @@ request.setCharacterEncoding("utf-8");
 			<tr>
 				<td colspan="4" height="200" valign="top">
 					<div>
-					<%
-					if(article.getMf_image() != null){
+					<%	
+					if(!article.getMf_image().equals("")){
 						
 						String [] imgArr = article.getMf_image().split(",");
 
@@ -77,7 +77,9 @@ request.setCharacterEncoding("utf-8");
 					%>
 						<img src="image/<%=article.getMf_image() %>" width="200"><br>
 						
-						<%} } %>
+						<%}}else{%>
+							
+						<% }%>
 					</div><br><br>
 					<%=article.getMf_content() %>
 				</td>
@@ -88,10 +90,10 @@ request.setCharacterEncoding("utf-8");
 					<input type="button" value="글쓰기" onClick="document.location.href='f_boardWriteForm.jsp'">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					
-					<input type="button" value="수정하기" onClick="document.location.href='f_boardUpdateForm.jsp?mi_num=<%=article.getMf_num()%>&pageNum=<%=pageNum%>'">
+					<input type="button" value="수정하기" onClick="document.location.href='f_boardUpdateForm.jsp?mf_num=<%=article.getMf_num()%>&pageNum=<%=pageNum%>'">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					
-					<input type="button" value="삭제하기" onClick="document.location.href='f_boardDeleteForm.jsp?mi_num=<%=article.getMf_num()%>&pageNum=<%=pageNum%>'">
+					<input type="button" value="삭제하기" onClick="document.location.href='f_boardDeleteForm.jsp?mf_num=<%=article.getMf_num()%>&pageNum=<%=pageNum%>'">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 
 					<input type="button" value="글목록" onClick="document.location.href='f_boardList.jsp?pageNum=<%=pageNum%>'">

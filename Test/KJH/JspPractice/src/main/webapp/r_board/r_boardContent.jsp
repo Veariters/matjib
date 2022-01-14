@@ -75,7 +75,7 @@ request.setCharacterEncoding("utf-8");
 							article.setMr_image(imgArr[i]);
 					
 					%>
-						<img src="image/<%=article.getMr_image() %>" width="200" onerror=""><br>
+						<img src="image/<%=article.getMr_image() %>" width="200"><br>
 						
 						<%} } %>
 					</div><br><br>

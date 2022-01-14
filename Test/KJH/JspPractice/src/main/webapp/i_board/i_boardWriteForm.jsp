@@ -61,13 +61,13 @@ function fileElement(fe){
 		<option value="Japaness">Japaness</option>
 	</select>
 </form><br>
-<div align="center"></div><font size="6em"><b>맛집 노선도</b></font><br>
+<div align="center"><font size="6em"><b>맛집 노선도</b></font></div><br>
 <hr color="skyblue">
 <nav id="topMenu" align="center">
 	<ul>
 		<li><a href="i_boardList.jsp" class="menuLink">공지사항</a></li>
-		<li><a href="#" class="menuLink">자유게시판</a></li>
-		<li><a href="#" class="menuLink">맛집 리뷰 게시판</a></li>
+		<li><a href="f_boardList.jsp" class="menuLink">자유게시판</a></li>
+		<li><a href="r_boardList.jsp" class="menuLink">맛집 리뷰 게시판</a></li>
 		<li><a href="#" class="menuLink">회원 메뉴</a></li>
 	</ul>
 </nav>
@@ -118,28 +118,33 @@ function fileElement(fe){
 		<input type="hidden" name="mi_pass" value="<%=getParam(request, "mi_pass") %>">
 		<input type="hidden" name="mi_subject" value="<%=getParam(request, "mi_subject") %>">
 		<input type="hidden" name="mi_content" value="<%=getParam(request, "mi_content") %>">
-		<%if(Integer.parseInt(request.getParameter("add")) > 0){
-			 %>
 		<input type="hidden" name="add" value="<%=getParam(request, "add") %>">
-		<%}else{ %>
-<script type="text/javascript">
-alert("이미지 개수를 입력해주세요(없을경우 숫자 0입력).");
-history.go(-1);
-</script>
-<%} %>
-	<% 
-	for(int i = 0; i < filecnt; i++){
-		if(filecnt > 9){
-			filecnt = 9;
+		<%
+		if (Integer.parseInt(request.getParameter("add")) > 0) {
+		%>
+		<input type="hidden" name="add" value="<%=getParam(request, "add")%>">
+		<%
+		} else {
+		%>
+		<script type="text/javascript">
+			alert("이미지 개수를 입력해주세요(없을경우 숫자 0입력).");
+			history.go(-1);
+		</script>
+		<%
 		}
-	
-	%>
-	<%=i+1 %> 번째 파일 선택 : <input type="file" name="mi_image<%=i+1%>"><br>
-	
-	<%} %>
-	<table>
-	<tr>
-		<td colspan="2" align="center" bgcolor="<%=value_c%>"><input type="submit" value="글쓰기">
+		%>
+		<%
+		for (int i = 0; i < filecnt; i++) {
+			if (filecnt > 9) {
+				filecnt = 9;
+			}
+		%>
+		<%=i + 1%>번째 파일 선택 : <input type="file" name="mi_image<%=i + 1%>"><br>
+
+		<%} %>
+		<table>
+		<tr>
+			<td colspan="2" align="center" bgcolor="<%=value_c%>"><input type="submit" value="글쓰기">
 															  <input type="reset" value="다시작성">
 															  <input type="button" value="목록" onClick="window.location='i_boardList.jsp'"></td>
 	</tr>

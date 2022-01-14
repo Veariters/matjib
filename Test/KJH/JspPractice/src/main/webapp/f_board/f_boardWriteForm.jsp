@@ -61,13 +61,13 @@ function fileElement(fe){
 		<option value="Japaness">Japaness</option>
 	</select>
 </form><br>
-<div align="center"><font size="6em"><b>맛집 노선도</b></font><br>
+<div align="center"><font size="6em"><b>맛집 노선도</b></font></div><br>
 <hr color="skyblue">
 <nav id="topMenu" align="center">
 	<ul>
 		<li><a href="i_boardList.jsp" class="menuLink">공지사항</a></li>
-		<li><a href="#" class="menuLink">자유게시판</a></li>
-		<li><a href="#" class="menuLink">맛집 리뷰 게시판</a></li>
+		<li><a href="f_boardList.jsp" class="menuLink">자유게시판</a></li>
+		<li><a href="r_boardList.jsp" class="menuLink">맛집 리뷰 게시판</a></li>
 		<li><a href="#" class="menuLink">회원 메뉴</a></li>
 	</ul>
 </nav>
@@ -79,7 +79,7 @@ function fileElement(fe){
 <table width="470" border="1" cellpadding="0" cellspacing="0" align="center" bgcolor="<%=bodyback_c%>">
 	<tr>
 		<td width="140" bgcolor="<%=value_c%>" align="center">아이디</td>
-		<td width="330"><input type="text" size="20" maxlength="20" name="mi_writer" value='<%=getParam(request, "mf_writer")%>'></td>
+		<td width="330"><input type="text" size="20" maxlength="20" name="mf_writer" value='<%=getParam(request, "mf_writer")%>'></td>
 	</tr>
 	<tr>
 		<td width="140" bgcolor="<%=value_c%>" align="center">비밀번호</td>
@@ -97,7 +97,6 @@ function fileElement(fe){
 		<td width="140" bgcolor="<%=value_c%>" align="center">추가할 파일 수(최대 9개)</td>
 		<td width="150"><input type="text" size="2" name="add" value='<%=getParam(request, "add")%>'><input type="submit" value="확인"></td>
 	</tr>
-	<tr><td>
 	</table>
 	</form>
 	
@@ -108,6 +107,8 @@ function fileElement(fe){
 	if(request.getParameter("add") != null){
 		
 		filecnt = Integer.parseInt(request.getParameter("add"));
+	}else{
+		filecnt = 0;
 	}
 	%>
 	<form action="f_boardWriteProc.jsp" encType="multipart/form-data" method="post">
@@ -116,14 +117,27 @@ function fileElement(fe){
 		<input type="hidden" name="mf_subject" value="<%=getParam(request, "mf_subject") %>">
 		<input type="hidden" name="mf_content" value="<%=getParam(request, "mf_content") %>">
 		<input type="hidden" name="add" value="<%=getParam(request, "add") %>">
-	<% 
-	for(int i = 0; i < filecnt; i++){
-		if(filecnt > 9){
-			filecnt = 9;
-		}
-	
-	%>
-	<%=i+1 %> 번째 파일 선택 : <input type="file" name="mf_image<%=i+1%>"><br>
+			<%
+			if (Integer.parseInt(request.getParameter("add")) > 0) {
+			%>
+			<input type="hidden" name="add" value="<%=getParam(request, "add")%>">
+			<%
+			} else {
+			%>
+			<script type="text/javascript">
+				alert("이미지 개수를 입력해주세요(없을경우 숫자 0입력).");
+				history.go(-1);
+			</script>
+			<%
+			}
+			%>
+			<%
+			for (int i = 0; i < filecnt; i++) {
+				if (filecnt > 9) {
+					filecnt = 9;
+				}
+			%>
+			<%=i+1 %> 번째 파일 선택 : <input type="file" name="mf_image<%=i+1%>"><br>
 	
 	<%} %>
 	<table>

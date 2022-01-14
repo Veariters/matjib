@@ -55,9 +55,7 @@ String mi_image = "";
  
  
  String mi_postdate = request.getParameter("mi_postdate");
-	
 
-	
 	I_BoardVO article = new I_BoardVO();
 	I_BoardDAO dbPro = I_BoardDAO.getInstance(); 
 	

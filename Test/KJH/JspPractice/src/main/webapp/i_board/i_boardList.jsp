@@ -84,25 +84,15 @@ number = count - (currentPage - 1) * pageSize;
 <nav id="topMenu" align="center">
 	<ul>
 		<li><a href="i_boardList.jsp" class="menuLink">공지사항</a></li>
-		<li><a href="#" class="menuLink">자유게시판</a></li>
-		<li><a href="#" class="menuLink">맛집 리뷰 게시판</a></li>
+		<li><a href="f_boardList.jsp" class="menuLink">자유게시판</a></li>
+		<li><a href="r_boardList.jsp" class="menuLink">맛집 리뷰 게시판</a></li>
 		<li><a href="#" class="menuLink">회원 메뉴</a></li>
 	</ul>
 </nav>
 <hr color="skyblue">
 <div style="position: absolute; left: 35%; font-size:2em;"><b>공지게시판</b></div>
 <div style="position: absolute; left: 70%; font-size:20px;"><b>말머리</b></div>
-<div align="right">
-<form name="chooseGenre" align="right">
-	<select name="Genre" style="position: absolute; left: 74%; width:100px; height:30px">
-		<option value="Bunsik" align="center">분식</option>
-		<option value="Hansik" align="center">한식</option>
-		<option value="Ilsik" align="center">일식</option>
-		<option value="Jungsik" align="center">중식</option>
-		<option value="Yangsik" align="center">양식</option>
-	</select>
-</form>
-</div><br><br>
+
 <%
 if(count == 0) { // 저장된 글이 없을 경우
 %>

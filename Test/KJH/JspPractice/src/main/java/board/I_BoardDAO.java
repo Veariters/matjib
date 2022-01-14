@@ -435,9 +435,7 @@ public class I_BoardDAO { // 게시판 작업의 기능들을 구현한 메서드
 					pstmt.setString(2, article.getMi_content());
 					pstmt.setString(3, article.getMi_image());
 					pstmt.setTimestamp(4, article.getMi_postdate());
-					System.out.println("여기가문제");
 					pstmt.setString(5, article.getMi_writer());
-					System.out.println("mi_writer : " + article.getMi_writer());
 					pstmt.executeUpdate();
 
 					result = 1;
