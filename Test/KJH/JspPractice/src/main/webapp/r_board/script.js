@@ -247,3 +247,13 @@ function deleteSave(){
 	
 	
 }
+
+function checkSearchHeader(){
+	
+	if(document.searchHeaderForm.searchText.value==""){
+		alert("말머리를 선택해주세요.");
+		document.searchHeaderForm.searchText.focus();
+		return false;
+		
+	}
+}

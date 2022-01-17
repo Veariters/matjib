@@ -21,8 +21,7 @@
 <div align="center">
 <b>글삭제</b>
 <br><br>
-<form action="r_boardDeleteProc.jsp?pageNum=<%=pageNum%>" 
-onsubmit="return deleteSave()" method="post" name="delForm">
+<form action="r_boardDeleteProc.jsp?pageNum=<%=pageNum%>" onsubmit="return deleteSave()" method="post" name="delForm">
 <table width="360" border="1" align="center" cellpadding="0" cellspacing="0">
 	<tr height="30">
 		<td align="center" bgcolor="<%=value_c%>">
@@ -32,8 +31,8 @@ onsubmit="return deleteSave()" method="post" name="delForm">
 	
 	<tr height="30">
 		<td align="center">비밀번호:
-			<input type="password" name="mr2_pass" size="8" maxlength="12">
-			<input type="hidden" name="mr2_num" value="<%=num %>">
+			<input type="password" name="mr_pass" size="8" maxlength="12">
+			<input type="hidden" name="mr_num" value="<%=num %>">
 		</td>
 	</tr>
 	

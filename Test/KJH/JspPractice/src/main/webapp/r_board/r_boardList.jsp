@@ -106,9 +106,9 @@ number = count - (currentPage - 1) * pageSize;
 <div style="position: absolute; left: 35%; font-size:2em;"><b>맛집리뷰 게시판(전체)</b></div>
 <div style="position: absolute; left: 70%; font-size:20px;"><label><b>말머리</b></label></div>
 <div align="right">
-<form action="r_boardList.jsp" name="searchHeaderForm" align="right" >
+<form action="r_boardList.jsp" name="searchHeaderForm" align="right" onsubmit="return checkSearchHeader()">
 	<select name="searchText" style="position: absolute; left: 74%; width:300px; height:30px">
-		<option value="말머리" align="center">------------말머리 선택-------------</option>
+		<option value="" align="center">----------------말머리 선택-----------------</option>
 		<option align="center">강남</option>
 		<option align="center">강변</option>
 		<option align="center">건대입구</option>

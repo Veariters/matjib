@@ -7,15 +7,15 @@
 <%
 request.setCharacterEncoding("utf-8");
 %>
-<jsp:useBean id="article" class="board.R2_BoardVO" scope="page">
+<jsp:useBean id="article" class="board.R_BoardVO" scope="page">
 	<jsp:setProperty name="article" property="*"/>
 </jsp:useBean>
 
 <%
-int num =  Integer.parseInt(request.getParameter("mr2_num"));
+int num =  Integer.parseInt(request.getParameter("mr_num"));
 	String pageNum = request.getParameter("pageNum");
 	R_BoardDAO dbPro = R_BoardDAO.getInstance();
-	String pass = request.getParameter("mr2_pass");
+	String pass = request.getParameter("mr_pass");
 	
 	int check = dbPro.deleteArticle(num, pass);
 	
