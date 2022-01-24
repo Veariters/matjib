@@ -2,7 +2,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="popup.PopupVO" %>
 <%@page import="popup.PopupDAO" %>
-<%@page import="board.R_BoardVO" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,16 +9,8 @@
 <%
 String loginID = (String)session.getAttribute("loginID");
 request.setCharacterEncoding("UTF-8");
-String stname = request.getParameter("stname");
-
-List<R_BoardVO> articleList = null;
-PopupDAO dao = new PopupDAO();
-articleList = dao.getArticles(stname);
-
-int count = 0;
-count = dao.getPopArticleCount(stname); // 해당 역 글 수
 %>
-
+ 
     
 <!DOCTYPE html>
 <html>
@@ -40,7 +31,7 @@ count = dao.getPopArticleCount(stname); // 해당 역 글 수
 
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
-#map_ma {width:500px; height:350px; clear:both; border:solid 1px #81BEF7;}
+
 a{text-decoration:none}
 *{font-family: 'Nanum Gothic', sans-serif;}
 #header
@@ -76,11 +67,11 @@ a{text-decoration:none}
 
 #section
 {
-	margin:0 auto;
+	margin:0 auto; 
 	position:relative;
 	z-index:1;
 	width : 1500px;
-	height: 1000px;
+	height: 700px;
 	border-color: #81BEF7;
 	font-family: 'Nanum Gothic', sans-serif;
 }
@@ -208,25 +199,19 @@ ul li{
 
 }
 
-#list tr:hover
-{
-	background-color:#E0ECF8;
-	transition: ease 0.2s;
-}
-
-
-
 
 </style>
 
 
 </head>
 <body link="black" vlink="black">
+
+
 <!-- 위 -->
 <div id="header">
 <br>
 	<div style="text-align : right; width:60%; float:left" >
-		<a href="../MainScreen.jsp"><img alt="" src="../images/MainLogo.png"></a>
+		<a href="../Main/MainScreen.jsp"><img alt="" src="images/MainLogo.png"></a>
 	</div>
 	
 	<div style="text-align: right; margin-left: 60% ">
@@ -254,29 +239,29 @@ ul li{
 <div id="nav">
 	<div id="menu">
 		<ul>
-			<li><a href="../../i_board/i_boardList.jsp">공지사항</a>
+			<li><a href="../i_board/i_boardList.jsp">공지사항</a>
 			</li>
-			<li><a href="../../f_board/f_boardList.jsp">자유게시판</a>
+			<li><a href="../f_board/f_boardList.jsp">자유게시판</a>
 			</li>
-			<li><a href="../../r_board/r_boardList.jsp">맛집리뷰 게시판</a>
+			<li><a href="../r_board/r_boardList.jsp">맛집리뷰 게시판</a>
 				<ul>
-					<li><a href="../../r_board/r1_boardList.jsp">2호선 (1)</a></li>
-					<li><a href="../../r_board/r2_boardList.jsp">2호선 (2)</a></li>
-					<li><a href="../../r_board/r3_boardList.jsp">2호선 (3)</a></li>
-					<li><a href="../../r_board/r4_boardList.jsp">2호선 (4)</a></li>
+					<li><a href="../r_board/r1_boardList.jsp">2호선 (1)</a></li>
+					<li><a href="../r_board/r2_boardList.jsp">2호선 (2)</a></li>
+					<li><a href="../r_board/r3_boardList.jsp">2호선 (3)</a></li>
+					<li><a href="../r_board/r4_boardList.jsp">2호선 (4)</a></li>
 				</ul>
 			</li>
 			<li><a href="#">회원 메뉴</a>
 				<ul>
 				<% if(loginID == null) { // 로그인이 안되면 %>
-					<li><a href="../../member/login.jsp">로그인</a></li>
+					<li><a href="../member/login.jsp">로그인</a></li>
 				<%}else {%>
-					<li><a href="../../member/logout.jsp">로그아웃</a></li>
+					<li><a href="../member/logout.jsp">로그아웃</a></li>
 				<%} %>
 				<% if(loginID == null) { // 로그인이 안되면 %>
-					<li><a href="../../member/login.jsp">마이페이지</a></li>
+					<li><a href="../member/login.jsp">마이페이지</a></li>
 				<%}else {%>
-					<li><a href="../../member/mypage.jsp">마이페이지</a></li>
+					<li><a href="../member/mypage.jsp">마이페이지</a></li>
 				<%} %>
 					
 				</ul>
@@ -288,105 +273,53 @@ ul li{
 </div>
 
 <!-- 메인부분 -->
-<div id="section" align="center">
-<br><br>
+<% if(loginID == null) { // 로그인이 안되면 %>
+	<script type="text/javascript">
+		window.location.href="login.jsp";
+	</script>
 
-	<table style="border: 1px solid; border-color: #81BEF7;">
-		<tr>
-			<td width="400px" height="80px" align="center" bgcolor="#CEE3F6" style="font-size: 27px; font-weight: bold;"><a href="Popupsta.jsp?stname=<%=stname%>">역 정보</a></td>
-			<td width="400px" height="80px" align="center" bgcolor="#CEE3F6" style="font-size: 27px; font-weight: bold;"><a href="Popupres.jsp?stname=<%=stname%>">맛집 정보</a></td>
-		</tr>
-		
-		<%
-			if(count == 0) { // 해당역 글이 없으면
-		%>
-		
-			<tr>
-			
-			  <td colspan="2" align="center"><div><a style="font-weight: bold; font-size: 14pt; "><br>해당 역의 맛집정보가 없습니다. 정보를 등록해주세요!<br><br></a></div></td>
-			  
-		    </tr>
-		</table>
-			
-		<%
-			}else {
-		%>
-		<tr>
-			<td colspan="2" align="center">
-				<h1><a style="color: #81BEF7; "><%=stname %></a>역 맛집 정보</h1>
-				<hr width="700" align="center" color="#81BEF7" >
-				<table border="0" style=" width: 700px;">
-					<tr>
-						<td width="100px" align="center"><a style="font-weight: bold">랭킹</a></td>
-						<td width="120px" align="center"><a style="font-weight: bold">사진</a></td>
-						<td width="400px" align="center"><a style="font-weight: bold">제목</a></td>
-						<td width="80px" align="center"><a style="font-weight: bold">추천수</a></td>
-					</tr>
-				</table>
-			<hr width="700" align="center" color="#81BEF7" >
-		<% for(int i=0; i<articleList.size(); i++) { 
-			R_BoardVO article = (R_BoardVO)articleList.get(i);
-		
-		%>
-				<table id="list" border="0" style=" width: 700px;">	
-					<tr>
-						<td width="100px" height="100px" align="center" style=" border-bottom: 1px dashed #81BEF7;">
-							<%if(i==0){ %>
-								<a style="font-size: 35pt; font-weight: bold; color: #FFBF00"><%=i+1%></a>
-							<%}else if(i==1) {%>
-								<a style="font-size: 28pt; font-weight: bold; color: #BDBDBD"><%=i+1%></a>
-							<%}else if(i==2) {%>
-								<a style="font-size: 28pt; font-weight: bold; color: #8A4B08"><%=i+1%></a>
-							<%}else {%>
-								<a style="font-size: 15pt; font-weight: bold;"><%=i+1%></a>
-							<%} %>
-						
-						</td>
-						<td width="120px" align="center" style=" border-bottom: 1px dashed #81BEF7;">
-							
-							<%=article.getMr_image() %>
-							
-						</td>
-						<td width="400px" align="center" style=" border-bottom: 1px dashed #81BEF7;">
-							<%if(i<3){ %>
-							<a href="../../r_board/r_boardContent.jsp?mr_num=<%= article.getMr_num()%>&pageNum=<%=1%>" style="font-size: 15pt; font-weight: bold;"><%=article.getMr_subject() %></a>
-							<%}else { %>
-							<a href="../../r_board/r_boardContent.jsp?mr_num=<%= article.getMr_num()%>&pageNum=<%=1%>" style="font-size: 12pt;"><%=article.getMr_subject() %></a>
-							<%} %>
-						</td>
-						<td width="80px" align="center" style=" border-bottom: 1px dashed #81BEF7;">
-						<%if(i<3){ %>
-							<a style="font-weight: bold;"><%=article.getMr_up() %></a>
-						<%}else { %>
-							<a><%=article.getMr_up() %></a>
-						<%} %>
-						</td>
-					</tr>
-					
-		  <%} %>
-				
-			
-			</table>
-				<hr width="700" align="center" color="#81BEF7" >
-			<%} %>
-				<br>
-				<input type="button" style="width:250px; height:40px; background-color:#CEE3F6; border:1px solid; border-color:#81BEF7; border-radius: 5px; font-weight: bold; cursor: pointer;" 
-					onclick="javascript:window.close()" value="창 닫기">
-					<br>
-					<br>	
-					
-			</td>
-			
-		</tr>
-	</table>
+
+<%}else{ %> 
+<div id="section">
+
+	<br><br><br>
+	<b style="font-size:30pt; color: #81BEF7; text-align: left; margin-left: 20%">마이페이지</b><br><br>
+	<b style="font-size:15pt; color: #81BEF7; text-align: left; margin-left: 20%; ">"<%=loginID %>"</b> 님 어서 오세요.	
 	
-</div>
+	
+	<table align="center" style="margin-top:1%" class="mo">
+		<tr>
+			<td height="100" style="font-size:25pt; color:#81BEF7"><b>마이페이지 메뉴</b>
+		</tr>
+		
+		<tr>
+			<td height="70"><a href="modifyForm.jsp" style="text-decoration:none; font-size:20pt;">1. 회원정보 수정</a></td>
+		</tr>
+		<tr>
+			<td height="70"><a style="text-decoration:none; font-size:20pt;" href="#">2. 작성리뷰 조회</a></td>
+		</tr>
+		<tr>
+			<td height="70"><a style="text-decoration:none; font-size:20pt;" href="deleteForm2.jsp">3. 회원 탈퇴</a></td>
+		</tr>
+		<tr>
+			<td height="70"><a style="text-decoration:none; font-size:20pt;" href="logout.jsp">4. 로그아웃</a></td>
+		</tr>
+			
+	</table>
+	 
+	 
+	 
+	 
+  </div>
+ 
+ <%} %>
 
+    
 
 
 <!-- 하단 -->
 <div id="footer">
-<br><br>
+<br>
 	<div>
 		<span ><a href="../pages/howto.jsp" style="color:black; font-weight: bold; font-family: 15pt;">페이지 이용방법</a></span>
 		<span><a style="color:black; font-weight: bold;">고객문의</a></span>
@@ -404,4 +337,5 @@ ul li{
 </div>
 
 </body>
+
 </html>

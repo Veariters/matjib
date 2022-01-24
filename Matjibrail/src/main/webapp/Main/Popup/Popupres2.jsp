@@ -13,13 +13,9 @@ request.setCharacterEncoding("UTF-8");
 String stname = request.getParameter("stname");
 
 List<R_BoardVO> articleList = null;
-PopupDAO dao = new PopupDAO();
+PopupDAO dao = new PopupDAO().getInstance();
 articleList = dao.getArticles(stname);
-
-int count = 0;
-count = dao.getPopArticleCount(stname); // 해당 역 글 수
 %>
-
     
 <!DOCTYPE html>
 <html>
@@ -80,7 +76,7 @@ a{text-decoration:none}
 	position:relative;
 	z-index:1;
 	width : 1500px;
-	height: 1000px;
+	height: 900px;
 	border-color: #81BEF7;
 	font-family: 'Nanum Gothic', sans-serif;
 }
@@ -208,14 +204,6 @@ ul li{
 
 }
 
-#list tr:hover
-{
-	background-color:#E0ECF8;
-	transition: ease 0.2s;
-}
-
-
-
 
 </style>
 
@@ -297,78 +285,58 @@ ul li{
 			<td width="400px" height="80px" align="center" bgcolor="#CEE3F6" style="font-size: 27px; font-weight: bold;"><a href="Popupres.jsp?stname=<%=stname%>">맛집 정보</a></td>
 		</tr>
 		
-		<%
-			if(count == 0) { // 해당역 글이 없으면
-		%>
-		
-			<tr>
-			
-			  <td colspan="2" align="center"><div><a style="font-weight: bold; font-size: 14pt; "><br>해당 역의 맛집정보가 없습니다. 정보를 등록해주세요!<br><br></a></div></td>
-			  
-		    </tr>
-		</table>
-			
-		<%
-			}else {
-		%>
 		<tr>
 			<td colspan="2" align="center">
-				<h1><a style="color: #81BEF7; "><%=stname %></a>역 맛집 정보</h1>
-				<hr width="700" align="center" color="#81BEF7" >
-				<table border="0" style=" width: 700px;">
+				<h1>맛집 정보</h1>
+				
+				<table border="1" style="border-color: #81BEF7;">
 					<tr>
-						<td width="100px" align="center"><a style="font-weight: bold">랭킹</a></td>
-						<td width="120px" align="center"><a style="font-weight: bold">사진</a></td>
-						<td width="400px" align="center"><a style="font-weight: bold">제목</a></td>
-						<td width="80px" align="center"><a style="font-weight: bold">추천수</a></td>
+						<td width="100px" align="center">랭킹</td>
+						<td width="100px" align="center">사진</td>
+						<td width="400px" align="center">제목</td>
+						<td width="100px" align="center">추천수</td>
 					</tr>
-				</table>
-			<hr width="700" align="center" color="#81BEF7" >
-		<% for(int i=0; i<articleList.size(); i++) { 
-			R_BoardVO article = (R_BoardVO)articleList.get(i);
 		
-		%>
-				<table id="list" border="0" style=" width: 700px;">	
+					
 					<tr>
-						<td width="100px" height="100px" align="center" style=" border-bottom: 1px dashed #81BEF7;">
-							<%if(i==0){ %>
-								<a style="font-size: 35pt; font-weight: bold; color: #FFBF00"><%=i+1%></a>
-							<%}else if(i==1) {%>
-								<a style="font-size: 28pt; font-weight: bold; color: #BDBDBD"><%=i+1%></a>
-							<%}else if(i==2) {%>
-								<a style="font-size: 28pt; font-weight: bold; color: #8A4B08"><%=i+1%></a>
-							<%}else {%>
-								<a style="font-size: 15pt; font-weight: bold;"><%=i+1%></a>
-							<%} %>
-						
-						</td>
-						<td width="120px" align="center" style=" border-bottom: 1px dashed #81BEF7;">
-							
-							<%=article.getMr_image() %>
-							
-						</td>
-						<td width="400px" align="center" style=" border-bottom: 1px dashed #81BEF7;">
-							<%if(i<3){ %>
-							<a href="../../r_board/r_boardContent.jsp?mr_num=<%= article.getMr_num()%>&pageNum=<%=1%>" style="font-size: 15pt; font-weight: bold;"><%=article.getMr_subject() %></a>
-							<%}else { %>
-							<a href="../../r_board/r_boardContent.jsp?mr_num=<%= article.getMr_num()%>&pageNum=<%=1%>" style="font-size: 12pt;"><%=article.getMr_subject() %></a>
-							<%} %>
-						</td>
-						<td width="80px" align="center" style=" border-bottom: 1px dashed #81BEF7;">
-						<%if(i<3){ %>
-							<a style="font-weight: bold;"><%=article.getMr_up() %></a>
-						<%}else { %>
-							<a><%=article.getMr_up() %></a>
-						<%} %>
-						</td>
+						<td height="100px" align="center">1</td>
+						<td>사진</td>
+						<td>제목</td>
+						<td>추천수</td>
 					</tr>
 					
-		  <%} %>
-				
+					<tr>
+						<td height="100px" align="center">2</td>
+						<td>사진</td>
+						<td>제목</td>
+						<td>추천수</td>
+					</tr>
+					
+					<tr>
+						<td height="100px" align="center">3</td>
+						<td>사진</td>
+						<td>제목</td>
+						<td>추천수</td>
+					</tr>
+					
+					<tr>
+						<td height="100px" align="center">4</td>
+						<td>사진</td>
+						<td>제목</td>
+						<td>추천수</td>
+					</tr>
+					
+					<tr>
+						<td height="100px" align="center">5</td>
+						<td>사진</td>
+						<td>제목</td>
+						<td>추천수</td>
+					</tr>
+						
+					
+				</table>
 			
-			</table>
-				<hr width="700" align="center" color="#81BEF7" >
-			<%} %>
+				
 				<br>
 				<input type="button" style="width:250px; height:40px; background-color:#CEE3F6; border:1px solid; border-color:#81BEF7; border-radius: 5px; font-weight: bold; cursor: pointer;" 
 					onclick="javascript:window.close()" value="창 닫기">

@@ -5,7 +5,17 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%!
+public String getParam(HttpServletRequest req, String param){
+	if(req.getParameter(param) != null){
+		return req.getParameter(param);
+	}
+	else{
+		return "";
+	}
+}
 
+%>
 <%
 String loginID = (String)session.getAttribute("loginID");
 request.setCharacterEncoding("UTF-8");
@@ -213,22 +223,31 @@ ul li{
 	<div style="text-align : right; width:60%; float:left" >
 		<a href="MainScreen.jsp"><img alt="" src="images/MainLogo.png"></a>
 	</div>
-	
-	<div style="text-align: right; margin-left: 60% ">
-		<form action="" style="margin-right: 5%">
-			<select id="mlan" name="laguage" style="text-align: center;">
+	<div>
+		<select id="mlan" name="laguage" style="text-align: center;">
 			<option value="ko">한국어</option> 
 			<option value="jp">일본어</option>
-			</select>
-			<br><br>
-			<select id="mserchlist" name="m_searchWhat" style="text-align: center;">
-			<option value="header">역이름</option> 
-			<option value="subject">제목</option>
-			<option value="content">내용</option>
-			<option value="writer">작성자</option>
-			</select>
-			<input id="mserchbox" type="text" name="m_serch">
-			<input id="mserchbt" type="submit" value="검색" style="font-weight : bold ;">
+		</select>
+	</div>
+	<div style="text-align: right; margin-left: 60% ">
+		<form action="MainBoardList.jsp" name="searchForm" align="right" onsubmit="return search()" method="post">
+	<select id="m_searchBoard" name="m_searchBoard" onchange="searchChoice(this)" value="<%=getParam(request, "m_searchBoard")%>" style="text-align: center;">	
+		<option value="">--------검색게시판 선택-------</option> 
+		<option value="i_board">공지게시판</option> 
+		<option value="f_board">자유게시판</option>
+		<option value="r_board">리뷰게시판</option>
+	</select>
+
+	<select name="m_searchWhat" id="m_searchWhat" value='<%=getParam(request, "m_searchWhat")%>'>
+			<option value="" align="center" selected="selected">--------검색조건 선택-------</option>
+			<option value="writer" align="center">작성자</option>
+			<option value="subject" align="center">제목</option>
+			<option value="content" align="center">내용</option>
+			<option value="header" align="center">역이름(리뷰게시판)</option>
+	</select>	
+ <input type="text" name="mserchbox">
+ <input type="submit" value="검색">
+</form>
 		</form>
 	</div>
 	

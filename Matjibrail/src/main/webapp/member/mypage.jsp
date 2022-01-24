@@ -286,7 +286,7 @@ ul li{
 	<b style="font-size:30pt; color: #81BEF7; text-align: left; margin-left: 20%">마이페이지</b><br><br>
 	<b style="font-size:15pt; color: #81BEF7; text-align: left; margin-left: 20%; ">"<%=loginID %>"</b> 님 어서 오세요.	
 	
-	
+<form action="../r_board/r_boardList.jsp" onsubmit="return search()" name="searchForm" >
 	<table align="center" style="margin-top:1%" class="mo">
 		<tr>
 			<td height="100" style="font-size:25pt; color:#81BEF7"><b>마이페이지 메뉴</b>
@@ -296,7 +296,10 @@ ul li{
 			<td height="70"><a href="modifyForm.jsp" style="text-decoration:none; font-size:20pt;">1. 회원정보 수정</a></td>
 		</tr>
 		<tr>
-			<td height="70"><a style="text-decoration:none; font-size:20pt;" href="#">2. 작성리뷰 조회</a></td>
+			<td height="70">
+			<input type="hidden" name="searchWhat" value="mr_writer">
+			<input id="searchText" type="hidden" name="searchText" value="<%=loginID%>">
+			<a style="text-decoration:none; font-size:20pt;" href="../r_board/r_boardList.jsp?searchWhat=mr_writer&searchText=<%=loginID%>">2. 작성리뷰 조회</a></td>
 		</tr>
 		<tr>
 			<td height="70"><a style="text-decoration:none; font-size:20pt;" href="deleteForm2.jsp">3. 회원 탈퇴</a></td>
@@ -304,14 +307,18 @@ ul li{
 		<tr>
 			<td height="70"><a style="text-decoration:none; font-size:20pt;" href="logout.jsp">4. 로그아웃</a></td>
 		</tr>
-			
+			<!--히든 값으로 검색 설정(작성리뷰 조회)  -->
 	</table>
-	 
-	 
+	<table>
+		<tr><td>
+			<input type="hidden" name="searchWhat" value="mr_writer">
+			<input type="hidden" name="searchText" value="<%=loginID%>">
+		</td></tr>
+	</table>
+ </form>
 	 
 	 
   </div>
- 
  <%} %>
 
     
