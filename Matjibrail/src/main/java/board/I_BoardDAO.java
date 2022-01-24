@@ -8,7 +8,7 @@ import java.util.*;
 
 import com.oreilly.servlet.MultipartRequest;
 
-public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
+public class I_BoardDAO { 
 
 	private static I_BoardDAO instance = null;
 
@@ -35,7 +35,7 @@ public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
 
 		int num = article.getMi_num();
 
-		int number = 0; // À¥¿¡ º¸ÀÌ´Â °Ô½Ã±ÛÀÇ °³¼ö¸¦ ³ªÅ¸³»´Â º¯¼ö
+		int number = 0; // ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë–›ï¿½ë™‹ï¿½ì‚• ï¿½ëœï¿½ë™ƒï¿½ë–†æºë¿ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ï¿½ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•
 
 		String sql = "";
 
@@ -72,7 +72,7 @@ public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
 
 	}
 
-	public int getArticleCount() { // ÀüÃ¼ ±ÛÀÇ °³¼ö¸¦ °¡Á®¿Ã ¸Ş¼Òµå ±¸Çö
+	public int getArticleCount() { // ï¿½ëœï¿½ë£ï¿½ì‚•ï§£ï¿½ ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë™£ï¿½ëƒ¼ï¿½ë²ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -115,7 +115,7 @@ public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
 	}
 
 	public int getArticleCount(String what, String content) {
-		// °Ë»öÇÑ ³»¿ëÀÌ ¸î°³ÀÎÁö ¾Ë¾Æº¸´Â ¸Ş¼Òµå¸¦ ¿À¹ö·ÎµùÀ¸·Î ±¸Çö(°Ë»öÁ¶°Ç-what, °Ë»ö³»¿ë-content·Î º¯¼ö¼³Á¤)
+		// ï¿½ëœï¿½ë–™ï¿½ê¶ªï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£œåª›ì’ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë–™ï¿½ë¸˜é‡‰ì•¹ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë™£ï¿½ëƒ¼ï¿½ë±¶ç‘œï¿½ ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë–¥ï¿½ë²ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•(ï¿½ëœï¿½ë–™ï¿½ê¶ªï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•-what, ï¿½ëœï¿½ë–™ï¿½ê¶ªï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•-contentï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•)
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -158,8 +158,8 @@ public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
 		return x;
 	}
 
-	public List<I_BoardVO> getArticles(int start, int end) { // board table¿¡¼­ °¡Á®¿Ã ¸Ş¼Òµå¸¦ List·Î ±¸Çö
-		// °Ë»öÇÒ ³»¿ëÀ» ¸®½ºÆ®·Î ¹Ş¾Æ¿È(what-°Ë»öÁ¶°Ç, content-°Ë»ö³»¿ë, start-½ÃÀÛ¹øÈ£, end-³¡¹øÈ£)
+	public List<I_BoardVO> getArticles(int start, int end) { // board tableï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë™£ï¿½ëƒ¼ï¿½ë±¶ç‘œï¿½ Listï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•
+		// ï¿½ëœï¿½ë–™ï¿½ê¶ªï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ë“ƒï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë™£ï¿½ë¸˜ï¿½ìŠ±ï¿½ì‚•(what-ï¿½ëœï¿½ë–™ï¿½ê¶ªï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•, content-ï¿½ëœï¿½ë–™ï¿½ê¶ªï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•, start-ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë™—è«­ê¾©ì‚•ï¿½ìƒ‡, end-ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ìƒ‡)
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -173,14 +173,14 @@ public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
 							+ "mi_readcount, mi_content, mi_image, mi_postdate from (select * from i_board order by mi_num desc)) "
 							+ "where rmi_num>= ? and rmi_num <= ?");
 
-			pstmt.setInt(1, start); // ³ªÁß¿¡ ¼öÁ¤3
+			pstmt.setInt(1, start); // ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë™¥ï¿½ìŠ±ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•3
 			pstmt.setInt(2, end);
 
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 
-				articleList = new ArrayList<I_BoardVO>(end - start + 1); // ³ªÁß¿¡ ¼öÁ¤4.
+				articleList = new ArrayList<I_BoardVO>(end - start + 1); // ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë™¥ï¿½ìŠ±ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•4.
 
 				do {
 
@@ -220,9 +220,7 @@ public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
 		return articleList;
 	}
 
-	public List<I_BoardVO> getArticles(String what, String content, int start, int end) { // board table¿¡¼­ °¡Á®¿Ã ¸Ş¼Òµå¸¦
-		// List·Î ±¸Çö -> ³ªÁß¿¡ ¼öÁ¤1 °Ë»öÇÒ ³»¿ëÀ» ¸®½ºÆ®·Î¹Ş¾Æ¿È(what-°Ë»öÁ¶°Ç, content-°Ë»ö³»¿ë,
-		// start-½ÃÀÛ¹øÈ£,end-³¡¹øÈ£)
+	public List<I_BoardVO> getArticles(String what, String content, int start, int end) { 
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -244,7 +242,7 @@ public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
 
 			if (rs.next()) {
 
-				articleList = new ArrayList<I_BoardVO>(end - start + 1); // ³ªÁß¿¡ ¼öÁ¤4.
+				articleList = new ArrayList<I_BoardVO>(end - start + 1); // ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë™¥ï¿½ìŠ±ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•4.
 
 				do {
 
@@ -285,8 +283,7 @@ public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
 	}
 
 	public I_BoardVO getArticle(int num) {
-		// ±Û Á¦¸ñÀ» ´©¸£¸é ±Û ³»¿ëÀ» º¼ ¼ö ÀÖµµ·Ï ÇÏ´Â ¸Ş¼Òµå ±¸Çö. ±ÛÀÇ numÀ» ¸Å°³º¯¼ö·Î ÇÏ¿© ÇÏ³ªÀÇ ±Û¿¡ ´ëÇÑ ¼¼ºÎÁ¤º¸¸¦ DB¿¡¼­ °¡Á®¿Ã
-		// ¸Ş¼­µå
+	
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -345,10 +342,7 @@ public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
 		return article;
 	}
 
-	// ±Û »ó¼¼º¸±â È­¸é¿¡¼­ [±Û¼öÁ¤]¹öÆ°À» ´©¸¦ °æ¿ì updateForm.jsp·Î ÀÌµ¿ÇÏµµ·Ï ¸µÅ©¸¦ °É¾î¼­ ±Û ¼öÁ¤ È­¸éÀ» ¼³°è ->
-	// ±Û¼öÁ¤½Ã¿¡´Â ±Û¸ñ·Ïº¸±â¿Í ´Ù¸£°ÔÁ¶È¸¼ö¸¦ Áõ°¡½ÃÅ³ ÇÊ¿ä ¾øÀ½
 
-	// Á¶È¸¼ö¸¦ Áõ°¡½ÃÅ°´Â ºÎºĞÀ» Á¦¿ÜÇÏ°í num¿¡ ÇØ´çÇÏ´Â ±ÛÀ» °¡Á®¿À´Â ¸Ş¼­µå ±¸Çö
 
 	public I_BoardVO updateGetArticle(int num) {
 		Connection con = null;
@@ -401,33 +395,32 @@ public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
 		return article;
 	}
 
-	public int updateArticle(I_BoardVO article) { // µ¥ÀÌÅÍº£ÀÌ½º¿¡¼­ ½ÇÁ¦ ¼öÁ¤ Ã³¸®°¡ µÇµµ·Ï ¸Ş¼­µå±¸Çö.(±ÛÀÌ ¾øÀ» °æ¿ì¿¡´Â -1¹İÈ¯, ¼öÁ¤ ¼º°ø½Ã 1¹İÈ¯, ¼öÁ¤ ½ÇÆĞ½Ã 0
-													// ¹İÈ¯
-	
+	public int updateArticle(I_BoardVO article) { 
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		String dbpass = "";
 		String sql = "";
 
 		int result = -1;
-	
+
 		try {
 
 			con = ConnUtil.getConnection();
 
-			pstmt = con.prepareStatement("select mi_pass from i_board where mi_writer=?");
+			pstmt = con.prepareStatement("select mi_pass from i_board where mi_writer = ?");
 
 			pstmt.setString(1, article.getMi_writer());
+
 			rs = pstmt.executeQuery();
-			// ¿©±â±îÁö´Â ¼º°ø
+			
 			if (rs.next()) {
 				dbpass = rs.getString("mi_pass");
 
-
-				if (dbpass.equals(article.getMi_pass())) { // ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÒ °æ¿ì --> ¼öÁ¤ Ã³¸®
-					sql = "update i_board set mi_subject=?, mi_content=?, mi_image=?, mi_postdate=? where mi_writer=?";
+				if (dbpass.equals(article.getMi_pass())) { // ï¿½ëœï¿½ë£ï¿½ì‚•è‰…ì„‡ëœï¿½ë–•ç¯€ë¥ì‚•ï¿½ëœå ï¿½ ï¿½ëœï¿½ë£ï¿½ì‚•ç§»ì„‡ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœå ï¿½ --> ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï§£ì„‡ëœï¿½ë£ï¿½ì‚•
+					sql = "update i_board set  mi_subject=?, mi_content=?, mi_image=?, mi_postdate=? where mi_writer=?";
 
 					pstmt = con.prepareStatement(sql);
 
@@ -441,7 +434,6 @@ public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
 					result = 1;
 
 				} else {
-				
 					result = 0;
 				}
 
@@ -469,7 +461,7 @@ public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
 		return result;
 	}
 
-	public int deleteArticle(int num, String pass) { // ±Û »èÁ¦ Ã³¸®ÇÒ ¸Ş¼­µå ±¸Çö(DB¿¡¼­ºñ¹Ğ¹øÈ£¸¦ ºñ±³ÇÏ¿© »èÁ¦)
+	public int deleteArticle(int num, String pass) { 
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -494,7 +486,7 @@ public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
 
 				dbpass = rs.getString("mi_pass");
 
-				if (dbpass.equals(pass)) { // ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÒ °æ¿ì --> »èÁ¦ Ã³¸®
+				if (dbpass.equals(pass)) { 
 
 					sql = "delete from i_board where mi_num=?";
 
@@ -504,8 +496,8 @@ public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
 
 					pstmt.executeUpdate();
 
-					result = 1; // »èÁ¦ ¼º°ø
-				} else { // ºñ¹Ğ¹øÈ£°¡ Æ²·ÈÀ» °æ¿ì
+					result = 1; 
+				} else { 
 					result = 0;
 				}
 
@@ -533,5 +525,144 @@ public class I_BoardDAO { // °Ô½ÃÆÇ ÀÛ¾÷ÀÇ ±â´ÉµéÀ» ±¸ÇöÇÑ ¸Ş¼­µå
 		return result;
 
 	}
+	
+	  
+	   public int UpdateRecommand(int num) {
+	      
+	      int result=0;
+	      Connection con = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      
+	      try {
+	         con = ConnUtil.getConnection();
+	         pstmt=con.prepareStatement("SELECT mi_RECOMMAND FROM i_board WHERE mi_num=?");
+	         pstmt.setInt(1, num);
+	         rs=pstmt.executeQuery();
+	         
+	         int recommand=0;
+	         
+	         while(rs.next()) {
+	            recommand=rs.getInt("mi_RECOMMAND");
+	         }
+	         
+	         pstmt=con.prepareStatement("UPDATE i_board SET mi_recommand=? WHERE mi_num=?");
+	         
+	         pstmt.setInt(1, recommand+1);
+	         pstmt.setInt(2, num);
+	         result=pstmt.executeUpdate();
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         if (rs != null)
+	            try {
+	               rs.close();
+	            } catch (SQLException s1) {
+	            }
+	         if (pstmt != null)
+	            try {
+	               pstmt.close();
+	            } catch (SQLException s2) {
+	            }
+	         if (con != null)
+	            try {
+	               con.close();
+	            } catch (SQLException s3) {
+	            }
+	      }
+	      
+	      return result;
+	   }
+	   
+	public int DeleteRecommand(int num) {
+	      
+	      int result=0;
+	      Connection con = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      
+	      try {
+	         con = ConnUtil.getConnection();
+	         pstmt=con.prepareStatement("SELECT mi_RECOMMAND FROM i_board WHERE mi_num=?");
+	         pstmt.setInt(1, num);
+	         rs=pstmt.executeQuery();
+	         
+	         int recommand=0;
+	         
+	         while(rs.next()) {
+	            recommand=rs.getInt("mi_RECOMMAND");
+	         }
+	         
+	         pstmt=con.prepareStatement("UPDATE i_board SET mi_recommand=? WHERE mi_num=?");
+	         pstmt.setInt(1, recommand-1);
+	         pstmt.setInt(2, num);
+	         result=pstmt.executeUpdate();
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         if (rs != null)
+	            try {
+	               rs.close();
+	            } catch (SQLException s1) {
+	            }
+	         if (pstmt != null)
+	            try {
+	               pstmt.close();
+	            } catch (SQLException s2) {
+	            }
+	         if (con != null)
+	            try {
+	               con.close();
+	            } catch (SQLException s3) {
+	            }
+	      }
+	      
+	      return result;
+	   }
+	   
+	
+	public int Recommand(int num) {
+	   
+	   int recommand=0;
+	   Connection con = null;
+	   PreparedStatement pstmt = null;
+	   ResultSet rs = null;
+	   
+	   try {
+	      con = ConnUtil.getConnection();
+	      pstmt=con.prepareStatement("SELECT mi_RECOMMAND FROM i_board WHERE mi_num=?");
+	      pstmt.setInt(1, num);
+	      rs=pstmt.executeQuery();
+	      
+
+	      
+	      while(rs.next()) {
+	         recommand=rs.getInt("mi_RECOMMAND");
+	      }
+	   }catch(Exception e) {
+	      e.printStackTrace();
+	   } finally {
+	      if (rs != null)
+	         try {
+	            rs.close();
+	         } catch (SQLException s1) {
+	         }
+	      if (pstmt != null)
+	         try {
+	            pstmt.close();
+	         } catch (SQLException s2) {
+	         }
+	      if (con != null)
+	         try {
+	            con.close();
+	         } catch (SQLException s3) {
+	         }
+	   }
+	   
+	   return recommand;
+	}
+
+	
+	
 
 }

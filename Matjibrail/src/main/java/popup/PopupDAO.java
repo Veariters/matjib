@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import board.ConnUtil;
+import board.R_BoardVO;
 
 
 
@@ -26,14 +31,6 @@ public class PopupDAO
 	}
 	
 	
-	/*
-	 * private Connection getConnection() { Connection con = null; try {
-	 * InitialContext ctx = new InitialContext(); DataSource ds =
-	 * (DataSource)ctx.lookup("java:comp/env/jdbc/mydb");
-	 * 
-	 * con = ds.getConnection(); }catch(Exception e) {
-	 * System.out.println("Connection 예외발생"); } return con; }
-	 */
 	public PopupVO getPopData(String stname)
 	{
 		Connection con = null;
@@ -72,5 +69,106 @@ public class PopupDAO
 		return vo;
 		
 	}
+	
+	//맛집정보 DAO. R보드에서 헤더로 추려서 정보가져오기.
+	public List<R_BoardVO> getArticles(String stname) 
+	{ 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<R_BoardVO> articleList = null;
+		
+		try {
+			
+			con = ConnUtil.getConnection();
+			
+			pstmt = con.prepareStatement("select * from (select * from R_BOARD where MR_HEADER=? order by MR_UP DESC) where rownum <= 5");
+			pstmt.setString(1, stname);
+		
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				
+				articleList = new ArrayList<R_BoardVO>(); 
+				
+				do {
+					
+					R_BoardVO article = new R_BoardVO();
+			
+					article.setMr_image(rs.getString("mr_image"));
+					article.setMr_subject(rs.getString("mr_subject"));
+					article.setMr_up(rs.getInt("mr_up"));
+					article.setMr_num(rs.getInt("mr_num"));
+					
+					articleList.add(article);
+				} while (rs.next());
+			}
+			
+		} catch (Exception s) {
+			System.out.println("Exception : " + s);
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException s1) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException s2) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException s3) {
+				}
+		}
+		return articleList;
+	}
+
+	//팝업 맛집정보에 들어갈 글 갯수 파악
+	public int getPopArticleCount(String stname) { 
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		int x = 0;
+
+		try {
+
+			con = ConnUtil.getConnection();
+
+			pstmt = con.prepareStatement("select count(*) from r_board where MR_HEADER=?");
+			pstmt.setString(1, stname);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				x = rs.getInt(1);
+			}
+
+		} catch (Exception s) {
+			System.out.println("Exception : " + s);
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException s1) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException s2) {
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException s3) {
+				}
+		}
+
+		return x;
+	}
+
 	
 }
